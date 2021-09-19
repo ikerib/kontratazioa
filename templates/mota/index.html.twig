@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Motak{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Motak</h3>
+                    <div class="card-tools">
+                        <a class="btn btn-primary" href="{{ path('mota_new') }}">Mota berria</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="myDatatable" class="table table-bordered table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ "Mota_eus" | trans}}</th>
+                            <th>{{ "Mota_es" | trans}}</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for motum in motas %}
+                            <tr>
+                                <td>{{ motum.id }}</td>
+                                <td>{{ motum.motaEus }}</td>
+                                <td>{{ motum.motaEs }}</td>
+                                <td>
+                                    <a href="{{ path('mota_show', {'id': motum.id}) }}">show</a>
+                                    <a href="{{ path('mota_edit', {'id': motum.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">{{ "no records found" | trans}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer"></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

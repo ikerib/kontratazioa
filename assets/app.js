@@ -34,12 +34,30 @@ const pdfFonts = require('pdfmake/build/vfs_fonts.js');
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import * as dtLocaleEu from './lib/datatables/locales/eu.json';
 import * as dtLocaleEs from './lib/datatables/locales/es.json';
+import Swal from 'sweetalert2'
 
 const adminlte = require('admin-lte');
 
 $(function () {
     $('#btnSaveButton').on('click', function () {
         $('#crudSubmitButton').trigger('click');
+    });
+
+    $('.btnDeleteButton').on('click', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Ziur zaude?',
+            text: "Onartuz gero ezingo da atzera egin!",
+            icon: 'Kontuz',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Bai, ezabatu'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).closest('form').submit();
+            }
+        })
     });
 
     const appLocale = $('#appLocale').val()
@@ -80,26 +98,26 @@ $(function () {
                     {
                         extend: "print",
                         text: "<i class='fas fa-print'></i> Print",
-                        className: 'btn-primary'
+                        className: 'btn-outline-primary btn-xs'
                     },
                     {
                         extend: "excelHtml5",
                         text: "<i class='far fa-file-excel'></i> Excel",
-                        className: 'btn-primary'
+                        className: 'btn-outline-primary btn-xs'
                     },
                     {
                         extend: "pdfHtml5",
                         text: "<i class='far fa-file-pdf'></i> PDF",
-                        className: 'btn-primary'
+                        className: 'btn-outline-primary btn-xs'
                     },
                     {
                         extend: "csvHtml5",
                         text: "<i class='fas fa-file-csv'></i> CSV",
-                        className: 'btn-primary'
+                        className: 'btn-outline-primary btn-xs'
                     },
                     {
                         extend: "colvis",
-                        className: 'btn-primary'
+                        className: 'btn-outline-primary btn-xs'
                     }
                 ],
             }}

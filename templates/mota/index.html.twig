@@ -3,7 +3,7 @@
 {% block title %}Motak{% endblock %}
 
 {% block body %}
-
+<h1>aaa <i class="far fa-comments"></i></h1>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -20,7 +20,7 @@
                             <th>#</th>
                             <th>{{ "Mota_eus" | trans}}</th>
                             <th>{{ "Mota_es" | trans}}</th>
-                            <th></th>
+                            <th>{{ "Actions" | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,8 +30,8 @@
                                 <td>{{ motum.motaEus }}</td>
                                 <td>{{ motum.motaEs }}</td>
                                 <td>
-                                    <a href="{{ path('mota_show', {'id': motum.id}) }}">show</a>
                                     <a href="{{ path('mota_edit', {'id': motum.id}) }}">edit</a>
+                                    {{ include('mota/_delete_form.html.twig') }}
                                 </td>
                             </tr>
                         {% else %}

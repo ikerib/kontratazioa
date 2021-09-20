@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="eu" target-language="es" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="hqoUgz6" resname="Mota_eus">
+        <source>Mota_eus</source>
+        <target>Tipo (Euskera)</target>
+      </trans-unit>
+      <trans-unit id="qsyWKR5" resname="Mota_es">
+        <source>Mota_es</source>
+        <target>Tipo (Castellano)</target>
+      </trans-unit>
+      <trans-unit id=".4BZ3Gd" resname="Actions">
+        <source>Actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit id="D5lam8." resname="no records found">
+        <source>no records found</source>
+        <target>No se han encontrado datos</target>
+      </trans-unit>
+      <trans-unit id="U0M9PNE" resname="back to list">
+        <source>back to list</source>
+        <target>Volver a la lista</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

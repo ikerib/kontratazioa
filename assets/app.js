@@ -45,45 +45,64 @@ $(function () {
     const appLocale = $('#appLocale').val()
 
 
-    $('#myDatatable').DataTable({
-        language: appLocale === "eu" ? dtLocaleEu : dtLocaleEs,
-        "dom": 'Bfrtip',
-        "autoWidth": false,
-        "lengthChange": true,
-        "info": true,
-        "ordering": true,
-        "paging": true,
-        "responsive": true,
-        "searching": true,
-        "buttons": ["copy", "csv", "excel", "pdf", "print","colvis"]
-    });
-        //
-        // $('#myDatatable').DataTable(
-        //     {
-        //         dom: "<'row'<'col-10'r>><'row'<'col-5'l><'col-7 text-right'f>>" +
-        //             "<'row'<'col-sm-12'B>><'row'<'col-sm-12't>><'row'<'col-5'i><'col-7'p>>",
-        //         buttons: {
-        //             dom: {
-        //                 button: {
-        //                     tag: 'button',
-        //                     className: 'btn btn-sm'
-        //                 }
-        //             },
-        //             buttons: [
-        //                 {extend: "print", text: "<i class='fas fa-print'></i> Print", className: 'btn-primary'},
-        //                 {
-        //                     extend: "excelHtml5",
-        //                     text: "<i class='far fa-file-excel'></i> Excel",
-        //                     className: 'btn-primary'
-        //                 },
-        //                 {
-        //                     extend: "pdfHtml5",
-        //                     text: "<i class='far fa-file-pdf'></i> PDF",
-        //                     className: 'btn-primary'
-        //                 },
-        //             ],
-        //         }
-        //     }
-        // );
+    // $('#myDatatable').DataTable({
+    //     language: appLocale === "eu" ? dtLocaleEu : dtLocaleEs,
+    //     "dom": 'Bfrtip',
+    //     "autoWidth": false,
+    //     "lengthChange": true,
+    //     "info": true,
+    //     "ordering": true,
+    //     "paging": true,
+    //     "responsive": true,
+    //     "searching": true,
+    //     "buttons": ["copy", "csv", "excel", "pdf", "print","colvis"]
+    // });
+
+        $('#myDatatable').DataTable({
+            language: appLocale === "eu" ? dtLocaleEu : dtLocaleEs,
+            autoWidth: false,
+            lengthChange: true,
+            info: true,
+            ordering: true,
+            paging: true,
+            responsive: true,
+            searching: true,
+            dom: "<'row'<'col-10'r>><'row'<'col-5'l><'col-7 text-right'f>>" +
+                 "<'row'<'col-sm-12'B>><'row'<'col-sm-12't>><'row'<'col-5'i><'col-7'p>>",
+            buttons: {
+                dom: {
+                    button: {
+                        tag: 'button',
+                        className: 'btn btn-sm'
+                    }
+                },
+                buttons: [
+                    {
+                        extend: "print",
+                        text: "<i class='fas fa-print'></i> Print",
+                        className: 'btn-primary'
+                    },
+                    {
+                        extend: "excelHtml5",
+                        text: "<i class='far fa-file-excel'></i> Excel",
+                        className: 'btn-primary'
+                    },
+                    {
+                        extend: "pdfHtml5",
+                        text: "<i class='far fa-file-pdf'></i> PDF",
+                        className: 'btn-primary'
+                    },
+                    {
+                        extend: "csvHtml5",
+                        text: "<i class='fas fa-file-csv'></i> CSV",
+                        className: 'btn-primary'
+                    },
+                    {
+                        extend: "colvis",
+                        className: 'btn-primary'
+                    }
+                ],
+            }}
+        );
 
 });

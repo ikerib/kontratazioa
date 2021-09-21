@@ -6,6 +6,7 @@ use App\Repository\SailaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=SailaRepository::class)
@@ -25,14 +26,39 @@ class Saila
     private $izena;
 
     /**
-     * @ORM\OneToMany(targetEntity=Kontratua::class, mappedBy="saila")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $kontratuas;
+    private $created;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
 
     public function __construct()
     {
-        $this->kontratuas = new ArrayCollection();
+        $this->kontratuak = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->izena;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity=Kontratua::class, mappedBy="saila")
+     */
+    private $kontratuak;
+
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
 
     public function getId(): ?int
     {
@@ -51,33 +77,59 @@ class Saila
         return $this;
     }
 
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?\DateTimeInterface
+    {
+        return $this->updated;
+    }
+
+    public function setUpdated(\DateTimeInterface $updated): self
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Kontratua[]
      */
-    public function getKontratuas(): Collection
+    public function getKontratuak(): Collection
     {
-        return $this->kontratuas;
+        return $this->kontratuak;
     }
 
-    public function addKontratua(Kontratua $kontratua): self
+    public function addKontratuak(Kontratua $kontratuak): self
     {
-        if (!$this->kontratuas->contains($kontratua)) {
-            $this->kontratuas[] = $kontratua;
-            $kontratua->setSaila($this);
+        if (!$this->kontratuak->contains($kontratuak)) {
+            $this->kontratuak[] = $kontratuak;
+            $kontratuak->setSaila($this);
         }
 
         return $this;
     }
 
-    public function removeKontratua(Kontratua $kontratua): self
+    public function removeKontratuak(Kontratua $kontratuak): self
     {
-        if ($this->kontratuas->removeElement($kontratua)) {
+        if ($this->kontratuak->removeElement($kontratuak)) {
             // set the owning side to null (unless already changed)
-            if ($kontratua->getSaila() === $this) {
-                $kontratua->setSaila(null);
+            if ($kontratuak->getSaila() === $this) {
+                $kontratuak->setSaila(null);
             }
         }
 
         return $this;
     }
+
+
 }

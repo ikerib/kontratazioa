@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\KontratuaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=KontratuaRepository::class)
@@ -33,16 +34,6 @@ class Kontratua
     private $izena_es;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Mota::class, inversedBy="kontratuak")
-     */
-    private $mota;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Prozedura::class, inversedBy="kontratuak")
-     */
-    private $prozedura;
-
-    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $aurrekontuaIva;
@@ -51,11 +42,6 @@ class Kontratua
      * @ORM\Column(type="float", nullable=true)
      */
     private $aurrekontuaIvaGabe;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Kontratista::class, inversedBy="kontratuak")
-     */
-    private $kontratista;
 
     /**
      * @ORM\Column(type="date")
@@ -88,11 +74,6 @@ class Kontratua
     private $luzapena;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Saila::class, inversedBy="kontratuas")
-     */
-    private $saila;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $oharrak;
@@ -101,6 +82,51 @@ class Kontratua
      * @ORM\Column(type="string", length=12, nullable=true)
      */
     private $espedienteElektronikoa;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
+
+    public function __toString()
+    {
+        return $this->izena_eus;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Mota::class, inversedBy="kontratuak")
+     */
+    private $mota;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Prozedura::class, inversedBy="kontratuak")
+     */
+    private $prozedura;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Kontratista::class, inversedBy="kontratuak")
+     */
+    private $kontratista;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Saila::class, inversedBy="kontratuas")
+     */
+    private $saila;
+
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
 
     public function getId(): ?int
     {
@@ -307,6 +333,30 @@ class Kontratua
     public function setEspedienteElektronikoa(?string $espedienteElektronikoa): self
     {
         $this->espedienteElektronikoa = $espedienteElektronikoa;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?\DateTimeInterface
+    {
+        return $this->updated;
+    }
+
+    public function setUpdated(\DateTimeInterface $updated): self
+    {
+        $this->updated = $updated;
 
         return $this;
     }

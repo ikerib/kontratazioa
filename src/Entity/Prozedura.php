@@ -6,6 +6,7 @@ use App\Repository\ProzeduraRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ProzeduraRepository::class)
@@ -30,14 +31,39 @@ class Prozedura
     private $prozedura_es;
 
     /**
-     * @ORM\OneToMany(targetEntity=Kontratua::class, mappedBy="prozedura")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $kontratuak;
+    private $created;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
 
     public function __construct()
     {
         $this->kontratuak = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->prozedura_eus;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity=Kontratua::class, mappedBy="prozedura")
+     */
+    private $kontratuak;
+
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
 
     public function getId(): ?int
     {
@@ -94,6 +120,30 @@ class Prozedura
                 $kontratuak->setProzedura(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getUpdated(): ?\DateTimeInterface
+    {
+        return $this->updated;
+    }
+
+    public function setUpdated(\DateTimeInterface $updated): self
+    {
+        $this->updated = $updated;
 
         return $this;
     }

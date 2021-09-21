@@ -49,16 +49,6 @@ class MotaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="mota_show", methods={"GET"})
-     */
-    public function show(Mota $motum): Response
-    {
-        return $this->render('mota/show.html.twig', [
-            'motum' => $motum,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="mota_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Mota $motum): Response

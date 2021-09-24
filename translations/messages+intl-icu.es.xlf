@@ -25,6 +25,94 @@
         <source>back to list</source>
         <target>Volver a la lista</target>
       </trans-unit>
+      <trans-unit id="GKrK4A_" resname="Izena_eus">
+        <source>Izena_eus</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="Kw3N1AA" resname="actions">
+        <source>actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit id="RkxP.QG" resname="Edit">
+        <source>Edit</source>
+        <target>Aldatu</target>
+      </trans-unit>
+      <trans-unit id="FQn1YfJ" resname="Save">
+        <source>Save</source>
+        <target>Gorde</target>
+      </trans-unit>
+      <trans-unit id="kMrydEK" resname="Izena">
+        <source>Izena</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="zE1IkZQ" resname="Prozedura_eus">
+        <source>Prozedura_eus</source>
+        <target>Procedimiento (Eus)</target>
+      </trans-unit>
+      <trans-unit id="0omA3an" resname="Prozedura_es">
+        <source>Prozedura_es</source>
+        <target>Procedimiento (Es)</target>
+      </trans-unit>
+      <trans-unit id="rR3GzXU" resname="Taula Laguntzaileak">
+        <source>Taula Laguntzaileak</source>
+        <target>Tablas auxliares</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Inicio</target>
+      </trans-unit>
+      <trans-unit id="OGGnnQf" resname="Espedientea">
+        <source>Espedientea</source>
+        <target>Espediente</target>
+      </trans-unit>
+      <trans-unit id="NgBcmC0" resname="Izena_es">
+        <source>Izena_es</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="kL5uQJD" resname="AurrekontuaIva">
+        <source>AurrekontuaIva</source>
+        <target>Presupuesto (con IVA)</target>
+      </trans-unit>
+      <trans-unit id="KDLVapt" resname="AurrekontuaIvaGabe">
+        <source>AurrekontuaIvaGabe</source>
+        <target>Presupuesto (sin IVA)</target>
+      </trans-unit>
+      <trans-unit id=".8Jbicr" resname="Sinadura">
+        <source>Sinadura</source>
+        <target>Firma</target>
+      </trans-unit>
+      <trans-unit id="7ro55Dn" resname="Iraupena">
+        <source>Iraupena</source>
+        <target>Duración</target>
+      </trans-unit>
+      <trans-unit id="1D.9FLD" resname="AdjudikazioaIva">
+        <source>AdjudikazioaIva</source>
+        <target>Adjudicación (con IVA)</target>
+      </trans-unit>
+      <trans-unit id="RgUMeaH" resname="AdjudikazioaIvaGabe">
+        <source>AdjudikazioaIvaGabe</source>
+        <target>Adjudicación (sin IVA)</target>
+      </trans-unit>
+      <trans-unit id="rXHrnpz" resname="Amaitua">
+        <source>Amaitua</source>
+        <target>Fin</target>
+      </trans-unit>
+      <trans-unit id="rknzl6b" resname="Luzapena">
+        <source>Luzapena</source>
+        <target>Prorroga</target>
+      </trans-unit>
+      <trans-unit id="Pvm0Q7N" resname="Oharrak">
+        <source>Oharrak</source>
+        <target>Notas</target>
+      </trans-unit>
+      <trans-unit id="y10ex7H" resname="EspedienteElektronikoa">
+        <source>EspedienteElektronikoa</source>
+        <target>Espediente Eléctronico</target>
+      </trans-unit>
+      <trans-unit id="G5ucOBI" resname="Kontratua">
+        <source>Kontratua</source>
+        <target>Contrato</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kontratuak{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">Kontratuak</li>
+    <li class="breadcrumb-item active">berria</li>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kontratuak</h3>
+                <div class="card-tools">
+                    <a class="btn btn-outline-primary" href="{{ path('kontratua_new') }}">Kontratu berria</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="myDatatable" class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ "Espedientea" | trans}}</th>
+                <th>{{ "Izena_eus" | trans}}</th>
+                <th>{{ "Izena_es" | trans}}</th>
+                <th>{{ "AurrekontuaIva" | trans}}</th>
+                <th>{{ "AurrekontuaIvaGabe" | trans}}</th>
+                <th>{{ "Sinadura" | trans}}</th>
+                <th>{{ "Iraupena" | trans}}</th>
+                <th>{{ "AdjudikazioaIva" | trans}}</th>
+                <th>{{ "AdjudikazioaIvaGabe" | trans}}</th>
+                <th>{{ "Amaitua" | trans}}</th>
+                <th>{{ "Luzapena" | trans}}</th>
+                <th>{{ "Oharrak" | trans}}</th>
+                <th>{{ "EspedienteElektronikoa" | trans}}</th>
+                <th>{{ "actions" | trans}}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for kontratua in kontratuas %}
+            <tr>
+                <td>{{ kontratua.id }}</td>
+                <td>{{ kontratua.espedientea }}</td>
+                <td>{{ kontratua.izenaEus }}</td>
+                <td>{{ kontratua.izenaEs }}</td>
+                <td>{{ kontratua.aurrekontuaIva }}</td>
+                <td>{{ kontratua.aurrekontuaIvaGabe }}</td>
+                <td>{{ kontratua.sinadura ? kontratua.sinadura|date('Y-m-d') : '' }}</td>
+                <td>{{ kontratua.iraupena }}</td>
+                <td>{{ kontratua.adjudikazioaIva }}</td>
+                <td>{{ kontratua.adjudikazioaIvaGabe }}</td>
+                <td>{{ kontratua.amaitua ? 'Yes' : 'No' }}</td>
+                <td>{{ kontratua.luzapena }}</td>
+                <td>{{ kontratua.oharrak }}</td>
+                <td>{{ kontratua.espedienteElektronikoa }}</td>
+                <td>
+                    <a href="{{ path('kontratua_show', {'id': kontratua.id}) }}">show</a>
+                    <a href="{{ path('kontratua_edit', {'id': kontratua.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">{{ "no records found" | trans}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+                </table>
+
+            </div>
+            <div class="card-footer"></div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

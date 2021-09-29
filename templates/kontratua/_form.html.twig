@@ -1,5 +1,86 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+{#    {{ form_widget(form) }}#}
+<div class="row">
+    <div class="col-6">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title m-0">Datuak</h5>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.espedientea) }}
+                {{ form_row(form.izena_eus) }}
+                {{ form_row(form.izena_es ) }}
+                {{ form_row(form.mota) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title m-0">Inporteak</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3 col-sm-3">{{ form_label(form.aurrekontuaIva) }}</div>
+                    <div class="col-9 col-sm-9">{{ form_widget(form.aurrekontuaIva) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-3 col-sm-3">{{ form_label(form.aurrekontuaIvaGabe) }}</div>
+                    <div class="col-9 col-sm-9">{{ form_widget(form.aurrekontuaIvaGabe) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-3 col-sm-3">{{ form_label(form.adjudikazioaIva) }}</div>
+                    <div class="col-9 col-sm-9">{{ form_widget(form.adjudikazioaIva) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-3 col-sm-3">{{ form_label(form.adjudikazioaIvaGabe) }}</div>
+                    <div class="col-9 col-sm-9">{{ form_widget(form.adjudikazioaIvaGabe) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title m-0"></h5>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.prozedura) }}
+                {{ form_row(form.kontratista) }}
+                {{ form_row(form.saila) }}
+                {{ form_row(form.espedienteElektronikoa) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title m-0"></h5>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.sinadura) }}
+                {{ form_row(form.iraupena) }}
+                {{ form_row(form.amaitua) }}
+                {{ form_row(form.luzapena) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="card card-gray">
+        <div class="card-header">
+            {{ form_label(form.oharrak) }}
+        </div>
+        <div class="card-body">
+            {{ form_errors(form.oharrak) }}
+            {{ form_widget(form.oharrak) }}
+        </div>
+    </div>
+</div>
+
 <div style="display: none;">
     <button id="crudSubmitButton" class="btn">{{ button_label|default(' Save') }}</button>
 </div>

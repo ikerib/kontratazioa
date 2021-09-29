@@ -64,6 +64,7 @@ class KontratuaType extends AbstractType
             ])
             ->add('saila', EntityType::class, [
                 'class' => Saila::class,
+                'label_attr' => ['class'=>'col-12 col-sm-12'],
                 'attr' => ['class' => 'form-control select2']
             ])
         ;

@@ -10,6 +10,7 @@ use App\Entity\Saila;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -51,8 +52,12 @@ class ImportCommand extends Command
         $sailaRepo = $this->entityManager->getRepository(Saila::class);
 
         $kontratuak = $this->getCsvAsArray();
+
+        $progressBar = new ProgressBar($output, count($kontratuak));
+        $progressBar->start();
+
         foreach ($kontratuak as $kontratua) {
-            $io->info($kontratua['ESPEDIENTEA /EXPEDIENTE']);
+            $progressBar->setMessage($kontratua['ESPEDIENTEA /EXPEDIENTE']);
             $k = new Kontratua();
             $k->setEspedientea($kontratua['ESPEDIENTEA /EXPEDIENTE']);
             $k->setIzenaEus($kontratua['ZERBITZUA']);
@@ -106,11 +111,13 @@ class ImportCommand extends Command
             $k->setOharrak($kontratua['OHARRAK / OBSERVACIONES']);
 
             $this->entityManager->persist($k);
+            $progressBar->advance();
         }
         $this->entityManager->flush();
+        $progressBar->finish();
 
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('Inportazioa amaitu da.');
 
         return Command::SUCCESS;
     }

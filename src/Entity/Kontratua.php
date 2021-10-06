@@ -69,7 +69,7 @@ class Kontratua
     private $amaitua;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $luzapena;
 
@@ -289,12 +289,12 @@ class Kontratua
         return $this;
     }
 
-    public function getLuzapena(): ?int
+    public function getLuzapena(): ?string
     {
         return $this->luzapena;
     }
 
-    public function setLuzapena(int $luzapena): self
+    public function setLuzapena(string $luzapena): self
     {
         $this->luzapena = $luzapena;
 

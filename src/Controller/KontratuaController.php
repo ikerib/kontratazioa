@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Kontratua;
+use App\Entity\KontratuaLote;
+use App\Form\KontratuaLoteType;
 use App\Form\KontratuaType;
+use App\Repository\KontratuaLoteRepository;
 use App\Repository\KontratuaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +21,10 @@ class KontratuaController extends AbstractController
     /**
      * @Route("/", name="kontratua_index", methods={"GET"})
      */
-    public function index(KontratuaRepository $kontratuaRepository): Response
+    public function index(KontratuaLoteRepository $kontratuaLoteRepository): Response
     {
         return $this->render('kontratua/index.html.twig', [
-            'kontratuas' => $kontratuaRepository->findAll(),
+            'loteak' => $kontratuaLoteRepository->findAll(),
         ]);
     }
 
@@ -72,9 +75,17 @@ class KontratuaController extends AbstractController
             return $this->redirectToRoute('kontratua_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $lote = new KontratuaLote();
+        $lote->setKontratua($kontratua);
+        $formNewLote = $this->createForm(KontratuaLoteType::class, $lote, [
+            'action' => $this->generateUrl('kontratua_lote_new'),
+            'method' => 'POST',
+        ]);
+
         return $this->renderForm('kontratua/edit.html.twig', [
             'kontratua' => $kontratua,
             'form' => $form,
+            'formNewLote' => $formNewLote
         ]);
     }
 

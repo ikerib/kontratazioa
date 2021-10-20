@@ -1,0 +1,52 @@
+{{ form_start( form, { 'attr': { 'id': 'form_lote_new'}}) }}
+<div class="row">
+    <div class="col-12">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title m-0">Xehetasunak</h5>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.name) }}
+                {{ form_row(form.kontratista) }}
+                {{ form_row(form.sinadura) }}
+                {{ form_row(form.iraupena) }}
+                {{ form_row(form.luzapena) }}
+                {{ form_row(form.amaitua) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title m-0">Aurrekontua</h5>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.aurrekontuaIva) }}
+                {{ form_row(form.aurrekontuaIvaGabe) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title m-0">Adjudikazioa</h5>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.adjudikazioaIva) }}
+                {{ form_row(form.adjudikazioaIvaGabe) }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div style="display: none;">
+    <button id="crudSubmitButton" class="btn">{{ button_label|default(' Save') }}</button>
+    {{ form_row(form.kontratua) }}
+</div>
+{{ form_end(form) }}

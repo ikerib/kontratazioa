@@ -41,20 +41,20 @@ class Kontratista
     /******************************************************************************************************************/
     /******************************************************************************************************************/
 
-    /**
-     * @ORM\OneToMany(targetEntity=Kontratua::class, mappedBy="kontratista")
-     */
-    private $kontratuak;
-
     public function __construct()
     {
-        $this->kontratuak = new ArrayCollection();
+        $this->lotes = new ArrayCollection();
     }
 
     public function __toString()
     {
         return $this->izena_eus;
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity=KontratuaLote::class, mappedBy="kontratista")
+     */
+    private $lotes;
 
     /******************************************************************************************************************/
     /******************************************************************************************************************/
@@ -127,6 +127,36 @@ class Kontratista
     public function setUpdated(\DateTimeInterface $updated): self
     {
         $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|KontratuaLote[]
+     */
+    public function getLotes(): Collection
+    {
+        return $this->lotes;
+    }
+
+    public function addLote(KontratuaLote $lote): self
+    {
+        if (!$this->lotes->contains($lote)) {
+            $this->lotes[] = $lote;
+            $lote->setKontratista($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLote(KontratuaLote $lote): self
+    {
+        if ($this->lotes->removeElement($lote)) {
+            // set the owning side to null (unless already changed)
+            if ($lote->getKontratista() === $this) {
+                $lote->setKontratista(null);
+            }
+        }
 
         return $this;
     }

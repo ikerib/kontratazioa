@@ -26,6 +26,8 @@ require( 'admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4.min')
 require( 'admin-lte/plugins/datatables-buttons/js/buttons.bootstrap4.min');
 require('admin-lte/plugins/datatables-buttons/js/buttons.print.min');
 require('admin-lte/plugins/datatables-buttons/js/buttons.colVis.min');
+require('admin-lte/plugins/datatables-rowgroup/js/rowGroup.bootstrap4.min')
+
 window.JSZip = require( 'jszip' );
 require( 'datatables.net-buttons/js/buttons.html5.js' );
 require( 'datatables.net-buttons/js/buttons.print.js' );
@@ -45,7 +47,7 @@ require("bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min")
 require("bootstrap-datepicker/dist/locales/bootstrap-datepicker.eu.min")
 require("bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css")
 
-
+require('jquery-validation')
 const adminlte = require('admin-lte');
 
 $(function () {
@@ -64,13 +66,50 @@ $(function () {
     $('#btnSaveButton').on('click', function () {
         $('#crudSubmitButton').trigger('click');
     });
+    $('.btnModalSaveLoteButton').on('click', function (e) {
+        let isValid = true;
+        let testua='';
+
+        if ($('#kontratua_lote_name').val() === '') {
+            isValid = false;
+            testua = '<p class="text-danger">Lote izena beharrezkoa da.</p>'
+        }
+        if($('#kontratua_lote_kontratista').val() === '') {
+            isValid = false;
+            testua += '<p class="text-danger">Kontratista bat aukeratzea beharrezkoa da.</p>'
+        }
+        if($('#kontratua_lote_sinadura').val() === '') {
+            isValid = false;
+            testua += '<p class="text-danger">Sinadura data bat aukeratzea beharrezkoa da.</p>'
+        }
+        if($('#kontratua_lote_iraupena').val() === '') {
+            isValid = false;
+            testua += '<p class="text-danger">Iraupena zehaztea beharrezkoa da.</p>'
+        }
+        if($('#kontratua_lote_luzapena').val() === '') {
+            isValid = false;
+            testua += '<p class="text-danger">Luzapena zehaztea beharrezkoa da.</p>'
+        }
+
+        if ( isValid === true ) {
+            console.log('Validating ok. submitting.')
+            $('#form_lote_new').submit();
+        } else {
+            console.log('Ez da balidatua izan.')
+            Swal.fire({
+                title: 'Zuzenedu ondoko akatsak',
+                html: testua,
+                icon: 'warning'
+            })
+        }
+    });
 
     $('.btnDeleteButton').on('click', function (e) {
         e.preventDefault();
         Swal.fire({
             title: 'Ziur zaude?',
             text: "Onartuz gero ezingo da atzera egin!",
-            icon: 'Kontuz',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -183,4 +222,16 @@ $(function () {
             ],
         }}
     );
+
+    $('#myDatatable3').DataTable( {
+        order: [[2, 'asc']],
+        rowGroup: {
+            dataSrc: 0
+        },
+        columnDefs: [ {
+            targets: [ 0],
+            visible: false
+        } ]
+    });
+
 });

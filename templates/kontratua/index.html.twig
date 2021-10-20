@@ -18,46 +18,32 @@
                 </div>
             </div>
             <div class="card-body">
-                <table id="myDatatable2" class="table table-bordered table-striped">
+                <table id="myDatatable3" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>{{ "Espedientea" | trans}}</th>
+                            <th>{{ "Lote" | trans}}</th>
                             <th>{{ "Izena_eus" | trans}}</th>
-                            <th>{{ "Izena_es" | trans}}</th>
-                            <th>{{ "AurrekontuaIva" | trans}}</th>
-                            <th>{{ "AurrekontuaIvaGabe" | trans}}</th>
                             <th>{{ "Sinadura" | trans}}</th>
                             <th>{{ "Iraupena" | trans}}</th>
-                            <th>{{ "AdjudikazioaIva" | trans}}</th>
-                            <th>{{ "AdjudikazioaIvaGabe" | trans}}</th>
                             <th>{{ "Amaitua" | trans}}</th>
                             <th>{{ "Luzapena" | trans}}</th>
-                            <th>{{ "EspedienteElektronikoa" | trans}}</th>
                             <th>{{ "actions" | trans}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for kontratua in kontratuas %}
+                    {% for lote in loteak %}
                         <tr>
-                            <td>{{ kontratua.espedientea }}</td>
-                            <td>{{ kontratua.izenaEus }}</td>
-                            <td>{{ kontratua.izenaEs }}</td>
-                            <td>{{ kontratua.aurrekontuaIva }}</td>
-                            <td>{{ kontratua.aurrekontuaIvaGabe }}</td>
-                            <td>{{ kontratua.sinadura ? kontratua.sinadura|date('Y-m-d') : '' }}</td>
-                            <td>{{ kontratua.iraupena }}</td>
-                            <td>{{ kontratua.adjudikazioaIva }}</td>
-                            <td>{{ kontratua.adjudikazioaIvaGabe }}</td>
-                            <td class="text-center">{{ kontratua.amaitua ? '<i title="Bai" class="fas fa-check-circle text-green"></i>' : '<i title="Ez" class="far fa-circle"></i>' }}</td>
-                            <td>{{ kontratua.luzapena }}</td>
-                            <td>{{ kontratua.espedienteElektronikoa }}</td>
+                            <td><a href="{{ path('kontratua_edit', { 'id': lote.kontratua.id }) }}">{{ lote.kontratua.espedientea }}</a></td>
+                            <td>{{ lote.name }}</td>
+                            <td>{{ lote.kontratua.izenaEus }}</td>
+                            <td>{{ lote.sinadura | date('Y-m-d') }}</td>
+                            <td>{{ lote.iraupena }}</td>
+                            <td>{% if lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
+                            <td>{{ lote.luzapena }}</td>
                             <td class="text-center">
-                                <a href="{{ path('kontratua_edit', {'id': kontratua.id}) }}"><i class="fas fa-edit"></i></a>
+                                <a href="{{ path('kontratua_edit', {'id': lote.id}) }}"><i class="fas fa-edit"></i></a>
                             </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="13">{{ "no records found" | trans}}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

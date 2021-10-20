@@ -113,6 +113,10 @@
         <source>Kontratua</source>
         <target>Kontratua</target>
       </trans-unit>
+      <trans-unit id="d2y2Duq" resname="Lote">
+        <source>Lote</source>
+        <target>Lote</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Kontratista;
 use App\Entity\Kontratua;
+use App\Entity\KontratuaLote;
 use App\Entity\Mota;
 use App\Entity\Prozedura;
 use App\Entity\Saila;
@@ -48,69 +49,59 @@ class ImportCommand extends Command
 
         $kontratuMotaRepo = $this->entityManager->getRepository(Mota::class);
         $prozeduraRepo = $this->entityManager->getRepository(Prozedura::class);
-        $kontratistaRepo = $this->entityManager->getRepository(Kontratista::class);
         $sailaRepo = $this->entityManager->getRepository(Saila::class);
 
         $kontratuak = $this->getCsvAsArray();
 
         $progressBar = new ProgressBar($output, count($kontratuak));
         $progressBar->start();
-
+        $aurrekoa =null;
+        $aurrekoK = null;
         foreach ($kontratuak as $kontratua) {
-            $progressBar->setMessage($kontratua['ESPEDIENTEA /EXPEDIENTE']);
-            $k = new Kontratua();
-            $k->setEspedientea($kontratua['ESPEDIENTEA /EXPEDIENTE']);
-            $k->setIzenaEus($kontratua['ZERBITZUA']);
-            $k->setIzenaEs($kontratua['SERVICIO']);
-            // Kontratu mota datu basean ez badago, sortu
-            if (!$kontratuMota = $kontratuMotaRepo->findOneBy(['mota_eus' => $kontratua['KONTRATU MOTA /TIPO CONTRATO']])) {
-                $kontratuMota = new Mota();
-                $kontratuMota->setMotaEus($kontratua['KONTRATU MOTA /TIPO CONTRATO']);
-                $kontratuMota->setMotaEs($kontratua['KONTRATU MOTA /TIPO CONTRATO']);
-                $this->entityManager->persist($kontratuMota);
+            if ( $aurrekoa === $kontratua['ZERBITZUA'] ){
+                $this->addLote($io, $kontratua, $aurrekoK);
+            } else {
+                $progressBar->setMessage($kontratua['ESPEDIENTEA /EXPEDIENTE']);
+                $k = new Kontratua();
+                $k->setEspedientea($kontratua['ESPEDIENTEA /EXPEDIENTE']);
+                $k->setIzenaEus($kontratua['ZERBITZUA']);
+                $aurrekoa = $kontratua['ZERBITZUA'];
+                $k->setIzenaEs($kontratua['SERVICIO']);
+                // Kontratu mota datu basean ez badago, sortu
+                if (!$kontratuMota = $kontratuMotaRepo->findOneBy(['mota_eus' => $kontratua['KONTRATU MOTA /TIPO CONTRATO']])) {
+                    $kontratuMota = new Mota();
+                    $kontratuMota->setMotaEus($kontratua['KONTRATU MOTA /TIPO CONTRATO']);
+                    $kontratuMota->setMotaEs($kontratua['KONTRATU MOTA /TIPO CONTRATO']);
+                    $this->entityManager->persist($kontratuMota);
+                    $this->entityManager->flush();
+                }
+                $k->setMota($kontratuMota);
+
+                // Prozedura datu basean ez badago, sortu
+                if (!$prozedura = $prozeduraRepo->findOneBy(['prozedura_eus' => $kontratua['PROZEDIURA /PROCEDIMIENTO']])) {
+                    $prozedura = new Prozedura();
+                    $prozedura->setProzeduraEus($kontratua['PROZEDIURA /PROCEDIMIENTO']);
+                    $prozedura->setProzeduraEs($kontratua['PROZEDIURA /PROCEDIMIENTO']);
+                    $this->entityManager->persist($prozedura);
+                    $this->entityManager->flush();
+                }
+                $k->setProzedura($prozedura);
+                // Saila DB-an ez badago, sortu
+                if (!$saila = $sailaRepo->findOneBy(['izena' => $kontratua['SAILA / DEPARTAMENTO']])) {
+                    $saila = new Saila();
+                    $saila->setIzena($kontratua['SAILA / DEPARTAMENTO']);
+                    $this->entityManager->persist($saila);
+                    $this->entityManager->flush();
+                }
+                $k->setSaila($saila);
+                $k->setOharrak($kontratua['OHARRAK / OBSERVACIONES']);
+
+                $this->addLote($io, $kontratua, $k);
+                $aurrekoK = $k;
+
+
+                $this->entityManager->persist($k);
             }
-            $k->setMota($kontratuMota);
-
-            // Prozedura datu basean ez badago, sortu
-            if (!$prozedura = $prozeduraRepo->findOneBy(['prozedura_eus' => $kontratua['PROZEDIURA /PROCEDIMIENTO']])) {
-                $prozedura = new Prozedura();
-                $prozedura->setProzeduraEus($kontratua['PROZEDIURA /PROCEDIMIENTO']);
-                $prozedura->setProzeduraEs($kontratua['PROZEDIURA /PROCEDIMIENTO']);
-                $this->entityManager->persist($prozedura);
-            }
-            $k->setProzedura($prozedura);
-
-            $k->setAurrekontuaIva((float)$kontratua["OINARRIZKO AURREKONTUA / IMPORTE LICITACION (CON IVA)"]);
-            $k->setAurrekontuaIvaGabe((float)$kontratua["OINARRIZKO AURREKONTUA / IMPORTE LICITACION (SIN IVA)"]);
-
-            // Kontratista DB-an ez badago, sortu
-            if (!$kontratista = $kontratistaRepo->findOneBy(['izena_eus' => $kontratua['KONTRATISTA / CONTRATISTA']])) {
-                $kontratista = new Kontratista();
-                $kontratista->setIzenaEus($kontratua['KONTRATISTA / CONTRATISTA']);
-                $this->entityManager->persist($kontratista);
-            }
-            $k->setKontratista($kontratista);
-
-//            $k->setSinadura(strtotime($kontratua['KONTRATU SINADURA / FIRMA DE CONTRATO']));
-//            $today = Carbon::createFromFormat('Y-m-d',   $kontratua['KONTRATU SINADURA / FIRMA DE CONTRATO']);
-            $d = new \DateTime($kontratua['KONTRATU SINADURA / FIRMA DE CONTRATO']);
-            $k->setSinadura($d);
-            $k->setIraupena($kontratua['IRAUPENA / DURACION']);
-            $k->setAdjudikazioaIva((float)$kontratua['ADJUDIKAZIOAREN ZENBATEKOA / IMPORTE ADJUDICACIÓN  (CON IVA)']);
-            $k->setAdjudikazioaIvaGabe((float)$kontratua['ADJUDIKAZIOAREN ZENBATEKOA / IMPORTE ADJUDICACIÓN (SIN IVA)']);
-            $k->setAmaitua($kontratua['KONTRATU AMAIERA /CONTRATO VENCIDO']);
-            $k->setLuzapena($kontratua['LUZAPENAK (URTEAK) / PRORROGA/AÑOS']);
-
-            // Saila DB-an ez badago, sortu
-            if (!$saila = $sailaRepo->findOneBy(['izena' => $kontratua['SAILA / DEPARTAMENTO']])) {
-                $saila = new Saila();
-                $saila->setIzena($kontratua['SAILA / DEPARTAMENTO']);
-                $this->entityManager->persist($saila);
-            }
-            $k->setSaila($saila);
-            $k->setOharrak($kontratua['OHARRAK / OBSERVACIONES']);
-
-            $this->entityManager->persist($k);
             $progressBar->advance();
         }
         $this->entityManager->flush();
@@ -123,9 +114,42 @@ class ImportCommand extends Command
     }
 
     private function getCsvAsArray() {
-        $inputFile = $this->projectDir . '/doc/importatu.csv';
+        $inputFile = $this->projectDir . '/doc/inport.csv';
         $decorder = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
         return $decorder->decode(file_get_contents($inputFile), 'csv', [CsvEncoder::DELIMITER_KEY => '|']);
+    }
+
+    private function addLote($io, $kontratua, $k) {
+        $kontratistaRepo = $this->entityManager->getRepository(Kontratista::class);
+        $lote = new KontratuaLote();
+        $lote->setKontratua($k);
+        $lote->setName($kontratua['LOTE']);
+        $lote->setAurrekontuaIva((float)$kontratua["OINARRIZKO AURREKONTUA / IMPORTE LICITACION (CON IVA)"]);
+        $lote->setAurrekontuaIvaGabe((float)$kontratua["OINARRIZKO AURREKONTUA / IMPORTE LICITACION (SIN IVA)"]);
+
+        // Kontratista DB-an ez badago, sortu
+        if (!$kontratista = $kontratistaRepo->findOneBy(['izena_eus' => $kontratua['KONTRATISTA / CONTRATISTA']])) {
+            $kontratista = new Kontratista();
+            $kontratista->setIzenaEus($kontratua['KONTRATISTA / CONTRATISTA']);
+            $this->entityManager->persist($kontratista);
+            $this->entityManager->flush();
+        }
+        $lote->setKontratista($kontratista);
+
+        try {
+            $d = new \DateTime($kontratua['KONTRATU SINADURA / FIRMA DE CONTRATO']);
+        } catch (\Exception  $e) {
+            $io->info($kontratua['ESPEDIENTEA /EXPEDIENTE'] . ' ' . $kontratua['ZERBITZUA'] . ' ==> sinadura data ezin izan da Datetime bihurtu.');
+            exit;
+        }
+
+        $lote->setSinadura($d);
+        $lote->setIraupena($kontratua['IRAUPENA / DURACION']);
+        $lote->setAdjudikazioaIva((float)$kontratua['ADJUDIKAZIOAREN ZENBATEKOA / IMPORTE ADJUDICACIÓN  (CON IVA)']);
+        $lote->setAdjudikazioaIvaGabe((float)$kontratua['ADJUDIKAZIOAREN ZENBATEKOA / IMPORTE ADJUDICACIÓN (SIN IVA)']);
+        $lote->setAmaitua($kontratua['KONTRATU AMAIERA /CONTRATO VENCIDO']);
+        $lote->setLuzapena($kontratua['LUZAPENAK (URTEAK) / PRORROGA/AÑOS']);
+        $this->entityManager->persist($lote);
     }
 
 }

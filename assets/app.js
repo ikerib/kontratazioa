@@ -47,7 +47,6 @@ require("bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min")
 require("bootstrap-datepicker/dist/locales/bootstrap-datepicker.eu.min")
 require("bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css")
 
-require('jquery-validation')
 const adminlte = require('admin-lte');
 
 $(function () {

@@ -57,10 +57,11 @@ $(function () {
         format: "yyyy-mm-dd",
         startView: "month",
         minViewMode: "month",
-        language: "eu"
+        language: "eu",
+        autoclose: true
     });
 
-    $('.select2').select2();
+    $('.select2').select2({ width: '100%' });
 
     $('#btnSaveButton').on('click', function () {
         $('#crudSubmitButton').trigger('click');

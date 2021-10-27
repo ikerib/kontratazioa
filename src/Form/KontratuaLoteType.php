@@ -36,7 +36,10 @@ class KontratuaLoteType extends AbstractType
             ->add('sinadura', DateType::class, [
                 'widget' => 'single_text',
                 'html5' => false,
-                'attr' => ['class' => 'datepicker col-2 col-sm-2'],
+                'attr' => [
+                    'class' => 'datepicker col-2 col-sm-2',
+                    'autocomplete' => 'off'
+                ]
             ])
             ->add('iraupena',null,[
                 'attr'  => [

@@ -68,7 +68,6 @@ $(function () {
         });
     });
 
-    // $(document).on('click', '.select2', function() {
     $('body').on('DOMNodeInserted', 'select', function () {
         console.log("JJ");
         $(this).select2({ width: '100%' });
@@ -78,18 +77,21 @@ $(function () {
 
 
     $('.btnModalNewLote').on('click', function () {
-        const url = Routing.generate('kontratua_lote_new');
+        const $kontratuid = $(this).data('kontratuid');
+        const url = Routing.generate('kontratua_lote_new', { kontratuid: $kontratuid });
         $.get(url, function (data) {
             $(".divLoteCrud").html(data);
+            $('.select2').select2({ width: '100%' });
             $('#modalLoteCrud').modal();
         });
     });
 
     $('.btnLoteEditInModal').on('click', function () {
-        const miid = $(this).data('id');
-        const url = Routing.generate('kontratua_lote_edit', {'id': miid});
+        const $miid = $(this).data('id');
+        const url = Routing.generate('kontratua_lote_edit', {'id': $miid});
         $.get(url, function (data) {
             $(".divLoteCrud").html(data);
+            $('.select2').select2({ width: '100%' });
             $('#modalLoteCrud').modal();
         });
     });

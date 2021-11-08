@@ -23,6 +23,7 @@ class KontratuaController extends AbstractController
      */
     public function index(KontratuaLoteRepository $kontratuaLoteRepository): Response
     {
+        dump($kontratuaLoteRepository->findAll());
         return $this->render('kontratua/index.html.twig', [
             'loteak' => $kontratuaLoteRepository->findAll(),
         ]);
@@ -52,16 +53,6 @@ class KontratuaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="kontratua_show", methods={"GET"})
-     */
-    public function show(Kontratua $kontratua): Response
-    {
-        return $this->render('kontratua/show.html.twig', [
-            'kontratua' => $kontratua,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="kontratua_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Kontratua $kontratua): Response
@@ -78,7 +69,7 @@ class KontratuaController extends AbstractController
         $lote = new KontratuaLote();
         $lote->setKontratua($kontratua);
         $formNewLote = $this->createForm(KontratuaLoteType::class, $lote, [
-            'action' => $this->generateUrl('kontratua_lote_new'),
+            'action' => $this->generateUrl('kontratua_lote_new', ['kontratuid' => $kontratua->getId()]),
             'method' => 'POST',
         ]);
 

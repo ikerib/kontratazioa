@@ -26,7 +26,7 @@
                 <td>{{ kontratua_lote.iraupena }}</td>
                 <td class="text-right">{{ kontratua_lote.adjudikazioaIva | format_currency('EUR')  }}</td>
                 <td class="text-right">{{ kontratua_lote.adjudikazioaIvaGabe | format_currency('EUR')  }}</td>
-                <td>{{ kontratua_lote.amaitua ? 'Yes' : 'No' }}</td>
+                <td>{% if kontratua_lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
                 <td>{{ kontratua_lote.luzapena }}</td>
                 <td class="text-center">
                     <ul class="list-inline">
@@ -37,6 +37,9 @@
                         </li>
                         <li class="list-inline-item">
                             {{ include('kontratua_lote/_delete_form.html.twig') }}
+                        </li>
+                        <li>
+                            <a href=""></a>
                         </li>
                     </ul>
                 </td>

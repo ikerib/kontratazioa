@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Kontratua;
 use App\Entity\KontratuaLote;
 use App\Form\KontratuaLoteType;
 use App\Repository\KontratuaLoteRepository;
@@ -26,13 +27,15 @@ class KontratuaLoteController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="kontratua_lote_new", methods={"GET","POST"}, options={"expose"=true},)
+     * @Route("/new/{kontratuid}", name="kontratua_lote_new", methods={"GET","POST"}, options={"expose"=true},)
      */
-    public function new(Request $request): Response
+    public function new(Request $request, $kontratuid): Response
     {
+        $kontratua = $this->getDoctrine()->getRepository(Kontratua::class)->find($kontratuid);
         $kontratuaLote = new KontratuaLote();
+        $kontratuaLote->setKontratua($kontratua);
         $form = $this->createForm(KontratuaLoteType::class, $kontratuaLote, [
-            'action' => $this->generateUrl('kontratua_lote_new')
+            'action' => $this->generateUrl('kontratua_lote_new', ['kontratuid' => $kontratuid])
         ]);
         $form->handleRequest($request);
 

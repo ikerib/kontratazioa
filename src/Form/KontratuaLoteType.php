@@ -7,7 +7,9 @@ use App\Entity\KontratuaLote;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class KontratuaLoteType extends AbstractType
@@ -17,18 +19,6 @@ class KontratuaLoteType extends AbstractType
         $builder
             ->add('name', null, [
                 'label' => 'Lotea',
-                'attr'  => [
-                    'autocomplete' => 'off'
-                ]
-            ])
-            ->add('aurrekontuaIva',null,[
-                'label' => 'BEZ',
-                'attr'  => [
-                    'autocomplete' => 'off'
-                ]
-            ])
-            ->add('aurrekontuaIvaGabe',null,[
-                'label' => 'BEZ gabe',
                 'attr'  => [
                     'autocomplete' => 'off'
                 ]
@@ -54,13 +44,26 @@ class KontratuaLoteType extends AbstractType
                     'autocomplete' => 'off'
                 ]
             ])
-            ->add('adjudikazioaIva',null,[
+            ->add('aurrekontuaIva',MoneyType::class,[
+                'label' => 'BEZ',
+                'attr'  => [
+                    'autocomplete' => 'off'
+                ]
+
+            ])
+            ->add('aurrekontuaIvaGabe',MoneyType::class,[
+                'label' => 'BEZ gabe',
+                'attr'  => [
+                    'autocomplete' => 'off'
+                ]
+            ])
+            ->add('adjudikazioaIva',MoneyType::class,[
                 'label' => 'BEZ',
                 'attr'  => [
                     'autocomplete' => 'off'
                 ]
             ])
-            ->add('adjudikazioaIvaGabe',null,[
+            ->add('adjudikazioaIvaGabe',MoneyType::class,[
                 'label' => 'BEZ gabe',
                 'attr'  => [
                     'autocomplete' => 'off'

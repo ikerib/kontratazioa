@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\KontratuaLoteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -85,6 +87,16 @@ class KontratuaLote
      * @ORM\ManyToOne(targetEntity=Kontratista::class, inversedBy="lotes")
      */
     private $kontratista;
+
+    /**
+     * @ORM\OneToMany(targetEntity=KontratuaLoteAlarma::class, mappedBy="lote", orphanRemoval=true)
+     */
+    private $alarmak;
+
+    public function __construct()
+    {
+        $this->alarmak = new ArrayCollection();
+    }
     
     /******************************************************************************************************************/
     /******************************************************************************************************************/
@@ -235,6 +247,36 @@ class KontratuaLote
     public function setFetxaIraupena(?\DateTimeInterface $fetxaIraupena): self
     {
         $this->fetxaIraupena = $fetxaIraupena;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|KontratuaLoteAlarma[]
+     */
+    public function getAlarmak(): Collection
+    {
+        return $this->alarmak;
+    }
+
+    public function addAlarmak(KontratuaLoteAlarma $alarmak): self
+    {
+        if (!$this->alarmak->contains($alarmak)) {
+            $this->alarmak[] = $alarmak;
+            $alarmak->setLote($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlarmak(KontratuaLoteAlarma $alarmak): self
+    {
+        if ($this->alarmak->removeElement($alarmak)) {
+            // set the owning side to null (unless already changed)
+            if ($alarmak->getLote() === $this) {
+                $alarmak->setLote(null);
+            }
+        }
 
         return $this;
     }

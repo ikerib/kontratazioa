@@ -46,6 +46,14 @@ class KontratuaLoteType extends AbstractType
                     'autocomplete' => 'off'
                 ]
             ])
+            ->add('fetxaIraupena', null,[
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => [
+                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'autocomplete' => 'off'
+                ]
+            ])
             ->add('adjudikazioaIva',null,[
                 'label' => 'BEZ',
                 'attr'  => [

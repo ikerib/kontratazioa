@@ -43,6 +43,11 @@ class KontratuaLote
     private $iraupena;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fetxaIraupena;
+
+    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $adjudikazioaIva;
@@ -218,6 +223,18 @@ class KontratuaLote
     public function setKontratista(?Kontratista $kontratista): self
     {
         $this->kontratista = $kontratista;
+
+        return $this;
+    }
+
+    public function getFetxaIraupena(): ?\DateTimeInterface
+    {
+        return $this->fetxaIraupena;
+    }
+
+    public function setFetxaIraupena(?\DateTimeInterface $fetxaIraupena): self
+    {
+        $this->fetxaIraupena = $fetxaIraupena;
 
         return $this;
     }

@@ -26,12 +26,14 @@ class KontratuaLoteController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="kontratua_lote_new", methods={"GET","POST"})
+     * @Route("/new", name="kontratua_lote_new", methods={"GET","POST"}, options={"expose"=true},)
      */
     public function new(Request $request): Response
     {
         $kontratuaLote = new KontratuaLote();
-        $form = $this->createForm(KontratuaLoteType::class, $kontratuaLote);
+        $form = $this->createForm(KontratuaLoteType::class, $kontratuaLote, [
+            'action' => $this->generateUrl('kontratua_lote_new')
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,7 +44,7 @@ class KontratuaLoteController extends AbstractController
             return $this->redirectToRoute('kontratua_edit', [ 'id' => $kontratuaLote->getKontratua()->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('kontratua_lote/new.html.twig', [
+        return $this->renderForm('kontratua_lote/_form.html.twig', [
             'kontratua_lote' => $kontratuaLote,
             'form' => $form,
         ]);
@@ -59,11 +61,13 @@ class KontratuaLoteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="kontratua_lote_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="kontratua_lote_edit", methods={"GET","POST"}, options={"expose"=true})
      */
     public function edit(Request $request, KontratuaLote $kontratuaLote): Response
     {
-        $form = $this->createForm(KontratuaLoteType::class, $kontratuaLote);
+        $form = $this->createForm(KontratuaLoteType::class, $kontratuaLote, [
+            'action' => $this->generateUrl('kontratua_lote_edit', ['id' => $kontratuaLote->getId()])
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,7 +76,7 @@ class KontratuaLoteController extends AbstractController
             return $this->redirectToRoute('kontratua_edit', ['id' => $kontratuaLote->getKontratua()->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('kontratua_lote/edit.html.twig', [
+        return $this->renderForm('kontratua_lote/_form.html.twig', [
             'kontratua_lote' => $kontratuaLote,
             'form' => $form,
         ]);

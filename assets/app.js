@@ -49,23 +49,55 @@ require("bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css"
 
 const adminlte = require('admin-lte');
 
+const routes = require('../public/js/fos_js_routes.json');
+import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+Routing.setRoutingData(routes);
+
+
 $(function () {
     const appLocale = $('#appLocale').val()
 
-    // noinspection JSCheckFunctionSignatures
-    $('.datepicker').datepicker({
-        format: "yyyy-mm-dd",
-        startView: "month",
-        minViewMode: "month",
-        language: "eu",
-        autoclose: true
+    $('body').on('focus',".datepicker", function(){
+        $(this).datepicker({
+            format: "yyyy-mm-dd",
+            startView: "month",
+            minViewMode: "month",
+            language: "eu",
+            autoclose: true
+        });
+    });
+
+    // $(document).on('click', '.select2', function() {
+    $('body').on('DOMNodeInserted', 'select', function () {
+        console.log("JJ");
+        $(this).select2({ width: '100%' });
     });
 
     $('.select2').select2({ width: '100%' });
 
+
+    $('.btnModalNewLote').on('click', function () {
+        const url = Routing.generate('kontratua_lote_new');
+        $.get(url, function (data) {
+            $(".divLoteCrud").html(data);
+            $('#modalLoteCrud').modal();
+        });
+    });
+
+    $('.btnLoteEditInModal').on('click', function () {
+        const miid = $(this).data('id');
+        const url = Routing.generate('kontratua_lote_edit', {'id': miid});
+        $.get(url, function (data) {
+            $(".divLoteCrud").html(data);
+            $('#modalLoteCrud').modal();
+        });
+    });
+
     $('#btnSaveButton').on('click', function () {
         $('#crudSubmitButton').trigger('click');
     });
+
     $('.btnModalSaveLoteButton').on('click', function (e) {
         let isValid = true;
         let testua='';

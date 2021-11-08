@@ -8,8 +8,27 @@
             <div class="card-body">
                 {{ form_row(form.name) }}
                 {{ form_row(form.kontratista) }}
-                {{ form_row(form.sinadura) }}
+                <div class="mb-3 row">
+                    {{ form_label(form.sinadura)}}
+                    <div class="col-sm-10 input-group date">
+                        {{ form_widget(form.sinadura)}}
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+
+                </div>
                 {{ form_row(form.iraupena) }}
+                <div class="mb-3 row">
+                  {{ form_label(form.fetxaIraupena)}}
+                    <div class="col-sm-10 input-group date">
+                        {{ form_widget(form.fetxaIraupena)}}
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+
+                </div>
                 {{ form_row(form.luzapena) }}
                 {{ form_row(form.amaitua) }}
             </div>

@@ -93,6 +93,21 @@ class KontratuaLote
      */
     private $alarmak;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $prorroga1;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $prorroga2;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $prorroga3;
+
     public function __construct()
     {
         $this->alarmak = new ArrayCollection();
@@ -277,6 +292,42 @@ class KontratuaLote
                 $alarmak->setLote(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProrroga1(): ?\DateTimeInterface
+    {
+        return $this->prorroga1;
+    }
+
+    public function setProrroga1(?\DateTimeInterface $prorroga1): self
+    {
+        $this->prorroga1 = $prorroga1;
+
+        return $this;
+    }
+
+    public function getProrroga2(): ?\DateTimeInterface
+    {
+        return $this->prorroga2;
+    }
+
+    public function setProrroga2(?\DateTimeInterface $prorroga2): self
+    {
+        $this->prorroga2 = $prorroga2;
+
+        return $this;
+    }
+
+    public function getProrroga3(): ?\DateTimeInterface
+    {
+        return $this->prorroga3;
+    }
+
+    public function setProrroga3(?\DateTimeInterface $prorroga3): self
+    {
+        $this->prorroga3 = $prorroga3;
 
         return $this;
     }

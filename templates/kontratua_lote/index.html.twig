@@ -3,31 +3,30 @@
         <thead>
             <tr>
                 {#<th>Id</th>#}
-                <th>Name</th>
+                <th>Lote</th>
                 <th>Aurrekontua</th>
-                <th>Aurrekontua Iva Gabe</th>
+                <th>Adjudikazioa</th>
                 <th>Sinadura</th>
                 <th>Iraupena</th>
-                <th>Adjudikazioa</th>
-                <th>Adjudikazioa Iva Gabe</th>
                 <th>Amaitua</th>
-                <th>Luzapena</th>
+                <th>Prorroga 1</th>
+                <th>Prorroga 2</th>
+                <th>Prorroga 3</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
         {% for kontratua_lote in kontratua_lotes %}
             <tr>
-                {#<td>{{ kontratua_lote.id }}</td>#}
                 <td>{{ kontratua_lote.name }}</td>
                 <td class="text-right">{{ kontratua_lote.aurrekontuaIva | format_currency('EUR') }}</td>
-                <td class="text-right">{{ kontratua_lote.aurrekontuaIvaGabe | format_currency('EUR') }}</td>
-                <td>{{ kontratua_lote.sinadura ? kontratua_lote.sinadura|date('Y-m-d') : '' }}</td>
-                <td>{{ kontratua_lote.iraupena }}</td>
                 <td class="text-right">{{ kontratua_lote.adjudikazioaIva | format_currency('EUR')  }}</td>
-                <td class="text-right">{{ kontratua_lote.adjudikazioaIvaGabe | format_currency('EUR')  }}</td>
+                <td class="text-center">{{ kontratua_lote.sinadura ? kontratua_lote.sinadura|date('Y-m-d') : '' }}</td>
+                <td class="text-center">{{ kontratua_lote.fetxaIraupena ? kontratua_lote.fetxaIraupena|date('Y-m-d') : '' }}</td>
                 <td>{% if kontratua_lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
-                <td>{{ kontratua_lote.luzapena }}</td>
+                <td class="text-center">{{ kontratua_lote.prorroga1 ? kontratua_lote.prorroga1|date('Y-m-d') : '' }}</td>
+                <td class="text-center">{{ kontratua_lote.prorroga2 ? kontratua_lote.prorroga2|date('Y-m-d') : '' }}</td>
+                <td class="text-center">{{ kontratua_lote.prorroga3 ? kontratua_lote.prorroga3|date('Y-m-d') : '' }}</td>
                 <td class="text-center">
                     <ul class="list-inline">
                         <li class="list-inline-item">

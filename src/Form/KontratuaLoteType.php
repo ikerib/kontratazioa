@@ -44,6 +44,31 @@ class KontratuaLoteType extends AbstractType
                     'autocomplete' => 'off'
                 ]
             ])
+            ->add('prorroga1', null,[
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => [
+                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'autocomplete' => 'off'
+                ]
+            ])
+            ->add('prorroga2', null,[
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => [
+                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'autocomplete' => 'off'
+                ]
+            ])
+            ->add('prorroga3', null,[
+                'label' => 'Prorroga 3',
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => [
+                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'autocomplete' => 'off'
+                ]
+            ])
             ->add('aurrekontuaIva',MoneyType::class,[
                 'label' => 'BEZ',
                 'attr'  => [

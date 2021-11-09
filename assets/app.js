@@ -202,6 +202,54 @@ $(function () {
         }}
     );
 
+    $('#dtNoSorting').DataTable({
+        language: appLocale === "eu" ? dtLocaleEu : dtLocaleEs,
+        autoWidth: false,
+        lengthChange: true,
+        info: true,
+        ordering: false,
+        bSort: false,
+        paging: true,
+        responsive: true,
+        searching: true,
+        dom: "<'row'<'col-10'r>><'row'<'col-5'l><'col-7 text-right'f>>" +
+             "<'row'<'col-sm-12'B>><'row'<'col-sm-12't>><'row'<'col-5'i><'col-7'p>>",
+        buttons: {
+            dom: {
+                button: {
+                    tag: 'button',
+                    className: 'btn btn-sm'
+                }
+            },
+            buttons: [
+                {
+                    extend: "print",
+                    text: "<i class='fas fa-print'></i> Print",
+                    className: 'btn-outline-primary btn-xs'
+                },
+                {
+                    extend: "excelHtml5",
+                    text: "<i class='far fa-file-excel'></i> Excel",
+                    className: 'btn-outline-primary btn-xs'
+                },
+                {
+                    extend: "pdfHtml5",
+                    text: "<i class='far fa-file-pdf'></i> PDF",
+                    className: 'btn-outline-primary btn-xs'
+                },
+                {
+                    extend: "csvHtml5",
+                    text: "<i class='fas fa-file-csv'></i> CSV",
+                    className: 'btn-outline-primary btn-xs'
+                },
+                {
+                    extend: "colvis",
+                    className: 'btn-outline-primary btn-xs'
+                }
+            ],
+        }}
+    );
+
     $('#myDatatable2').DataTable({
         language: appLocale === "eu" ? dtLocaleEu : dtLocaleEs,
         columnDefs: [

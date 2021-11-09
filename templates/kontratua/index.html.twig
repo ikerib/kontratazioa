@@ -37,7 +37,7 @@
                             <td><a href="{{ path('kontratua_edit', { 'id': lote.kontratua.id }) }}">{{ lote.kontratua.espedientea }}</a></td>
                             <td>{{ lote.name }}</td>
                             <td>{{ lote.kontratua.izenaEus }}</td>
-                            <td>{{ lote.sinadura | date('Y-m-d') }}</td>
+                            <td class="text-center">{{ lote.sinadura ? lote.sinadura|date('Y-m-d') : '' }}</td>
                             <td>{{ lote.iraupena }}</td>
                             <td>{% if lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
                             <td>{{ lote.luzapena }}</td>

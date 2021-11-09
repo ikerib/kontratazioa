@@ -19,6 +19,17 @@ class KontratuaLoteRepository extends ServiceEntityRepository
         parent::__construct($registry, KontratuaLote::class);
     }
 
+    public function getAllByProrroga()
+    {
+        $qb = $this->createQueryBuilder('k')
+            ->orderBy(
+                'GREATEST(COALESCE(k.fetxaIraupena,0),COALESCE(k.prorroga1,0), COALESCE(k.prorroga2,0), COALESCE(k.prorroga3,0) )', 'DESC'
+            )
+            ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return KontratuaLote[] Returns an array of KontratuaLote objects
     //  */

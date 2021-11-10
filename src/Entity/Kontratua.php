@@ -86,6 +86,11 @@ class Kontratua
      */
     private $lotes;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $artxiboa;
+
     public function __construct()
     {
         $this->lotes = new ArrayCollection();
@@ -246,6 +251,18 @@ class Kontratua
                 $lote->setKontratua(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getArtxiboa(): ?string
+    {
+        return $this->artxiboa;
+    }
+
+    public function setArtxiboa(?string $artxiboa): self
+    {
+        $this->artxiboa = $artxiboa;
 
         return $this;
     }

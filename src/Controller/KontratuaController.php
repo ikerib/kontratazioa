@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Kontratua;
 use App\Entity\KontratuaLote;
+use App\Form\BilatzaileaType;
 use App\Form\KontratuaLoteType;
 use App\Form\KontratuaType;
 use App\Repository\KontratuaLoteRepository;
@@ -21,13 +22,39 @@ class KontratuaController extends AbstractController
     /**
      * @Route("/", name="kontratua_index", methods={"GET"})
      */
-    public function index(KontratuaLoteRepository $kontratuaLoteRepository): Response
+    public function index(Request $request, KontratuaLoteRepository $kontratuaLoteRepository): Response
     {
-        dump($kontratuaLoteRepository->findAll());
+        $myFilters = $this->getFinderParams($request->query->get('bilatzailea'));
+        $query = $kontratuaLoteRepository->bilaketa($myFilters);
+        $kontratuaLote = new KontratuaLote();
+        $form = $this->createForm(BilatzaileaType::class, $kontratuaLote, [
+            'method' => 'GET',
+            'action' => $this->generateUrl('kontratua_index')
+        ]);
         return $this->render('kontratua/index.html.twig', [
-            'loteak' => $kontratuaLoteRepository->findAll(),
+            'loteak' => $query,
+            'form' => $form->createView()
         ]);
     }
+
+    private function getFinderParams($filters): array
+    {
+        $myFilters = [];
+        if ($filters)
+        {
+            foreach ($filters as $key => $value)
+            {
+                if (($key !== '_token') && ($value !== ''))
+                {
+                    $aFilter           = array_map('trim', explode('&', $value));
+                    $myFilters[ $key ] = $aFilter;
+                }
+            }
+        }
+
+        return $myFilters;
+    }
+
 
     /**
      * @Route("/new", name="kontratua_new", methods={"GET","POST"})

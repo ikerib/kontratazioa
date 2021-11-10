@@ -21,21 +21,27 @@ class KontratuaType extends AbstractType
             ->add('espedientea')
             ->add('izena_eus')
             ->add('izena_es')
+            ->add('artxiboa')
+            ->add('espedienteElektronikoa', null, [
 
-            ->add('espedienteElektronikoa')
+                'label_attr' => ['class' => 'col-sm-4'],
+            ])
 
             ->add('mota', EntityType::class, [
+                'attr' => ['class' => 'form-control select2'],
                 'class' => Mota::class,
-                'attr' => ['class' => 'form-control select2']
+                'placeholder' => 'Aukeratu bat'
             ])
             ->add('oharrak', CKEditorType::class,[])
             ->add('prozedura', EntityType::class, [
+                'attr' => ['class' => 'form-control select2'],
                 'class' => Prozedura::class,
-                'attr' => ['class' => 'form-control select2']
+                'placeholder' => 'Aukeratu bat'
             ])
             ->add('saila', EntityType::class, [
+                'attr' => ['class' => 'form-control select2'],
                 'class' => Saila::class,
-                'attr' => ['class' => 'form-control select2']
+                'placeholder' => 'Aukeratu bat'
             ])
 
         ;

@@ -96,6 +96,9 @@ $(function () {
         });
     });
 
+    $("#btnFrmFinderSubmit").on("click", function () {
+        $("#frmFinder").submit();
+    });
     $('#btnSaveButton').on('click', function () {
         $('#crudSubmitButton').trigger('click');
     });

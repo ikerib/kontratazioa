@@ -30,32 +30,43 @@ class KontratuaLoteRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    // /**
-    //  * @return KontratuaLote[] Returns an array of KontratuaLote objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function bilaketa($myFilters)
     {
-        return $this->createQueryBuilder('k')
-            ->andWhere('k.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('k.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('a');
+        $andStatements = $qb->expr()->andX();
+        if ( count($myFilters) === 0 ) {
+            return $qb->getQuery()->getResult();
+        }
 
-    /*
-    public function findOneBySomeField($value): ?KontratuaLote
-    {
-        return $this->createQueryBuilder('k')
-            ->andWhere('k.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        foreach ($myFilters as $key=>$value) {
+            // begiratu espazioak dituen
+            foreach ($value as $i => $iValue) {
+                $searchTerms = explode('+', $iValue );
+                foreach ($searchTerms as $k => $val) {
+                    if (strpos($val,"\"") !== false ){
+                        $val = str_replace("\"", '', $val);
+                        /**********************************************************************************************/
+                        /**********************************************************************************************/
+                        /**********************************************************************************************/
+                        // % % kendu bilaketa zehatza egin dezan. Clarak eskatuta.
+                        // $andStatements->add($qb->expr()->like("REPLACE(a.$key,',','')", $qb->expr()->literal('%' . trim($val) . '%')));
+                        $andStatements->add($qb->expr()->like("REPLACE(a.$key,',','')", $qb->expr()->literal(trim($val))));
+                        /**********************************************************************************************/
+                        /**********************************************************************************************/
+                        /**********************************************************************************************/
+                    } else {
+                        $andStatements->add(
+                            $qb->expr()->like("a.$key", $qb->expr()->literal('%' . trim($val) . '%'))
+                        );
+                    }
+                }
+            }
+        }
+        $qb->andWhere($andStatements);
+
+
+        dump($qb->getQuery()->getSQL());
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

@@ -10,10 +10,7 @@
                 {{ form_row(form.espedientea) }}
                 {{ form_row(form.izena_eus) }}
                 {{ form_row(form.izena_es ) }}
-                <div class="mb-3 row">
-                    <label class="col-form-label col-sm-2 required"></label>
-                    <div class="form-control" style="border: 0 !important;"></div>
-                </div>
+                {{ form_row(form.artxiboa ) }}
             </div>
         </div>
     </div>
@@ -26,7 +23,14 @@
                 {{ form_row(form.mota) }}
                 {{ form_row(form.prozedura) }}
                 {{ form_row(form.saila) }}
-                {{ form_row(form.espedienteElektronikoa) }}
+                <div class="mb-4 row">
+                    {{ form_label(form.espedienteElektronikoa) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(form.espedienteElektronikoa) }}
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@ class ImportCommand extends Command
 {
     protected static $defaultName = 'app:import';
     protected static $defaultDescription = 'Add a short description for your command';
-    private $projectDir;
+    private string $projectDir;
     private EntityManagerInterface $entityManager;
 
     public function __construct($projectDir, EntityManagerInterface $entityManager)
@@ -37,10 +37,10 @@ class ImportCommand extends Command
 
     protected function configure(): void
     {
-//        $this
-//            ->addArgument('arg1', InputArgument::REQUIRED, 'Argument description')
+        $this
+            ->addArgument('fitxategia', InputArgument::REQUIRED, 'fitxategia')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-//        ;
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

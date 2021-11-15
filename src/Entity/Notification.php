@@ -18,12 +18,6 @@ class Notification
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Erabiltzailea::class, inversedBy="notifications")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $erabiltzailea;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $noiz;
@@ -37,18 +31,6 @@ class Notification
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getErabiltzailea(): ?Erabiltzailea
-    {
-        return $this->erabiltzailea;
-    }
-
-    public function setErabiltzailea(?Erabiltzailea $erabiltzailea): self
-    {
-        $this->erabiltzailea = $erabiltzailea;
-
-        return $this;
     }
 
     public function getNoiz(): ?\DateTimeInterface

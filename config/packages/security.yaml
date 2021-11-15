@@ -1,27 +1,32 @@
 security:
-  enable_authenticator_manager: true
-  password_hashers:
-    PasaiakoUdala\AuthBundle\Entity\User:
-      algorithm: auto
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        users_in_memory: { memory: null }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: users_in_memory
+#            custom_authenticator: App\Security\FormLoginAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
-  providers:
-    database_users:
-      entity: { class: PasaiakoUdala\AuthBundle\Entity\User, property: username }
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
 
-  firewalls:
-    dev:
-      pattern: ^/(_(profiler|wdt)|css|images|js)/
-      security: false
-    main:
-      #            pattern: ^/
-      lazy: true
-      provider: database_users
-      custom_authenticator: paud.form.auth
-      logout:
-        path: pasaiakoudala_auth_logout
-  #                target: default
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
 
-
-  access_control:
-    #        - { path: ^/login, roles: PUBLIC_ACCESS }
-    - { path: ^/admin, roles: ROLE_ADMIN }
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

@@ -1,5 +1,0 @@
-pasaiako_udala_auth:
-    route_after_successfull_login: "home"
-    LDAP_ADMIN_TALDEAK: "%env(resolve:LDAP_ADMIN_TALDEAK)%"
-    LDAP_KUDEATU_TALDEAK: "%env(resolve:LDAP_KUDEATU_TALDEAK)%"
-    LDAP_USER_TALDEA: "%env(resolve:LDAP_KUDEATU_TALDEAK)%"

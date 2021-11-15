@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erabiltzailea index{% endblock %}
+
+{% block body %}
+    <h1>Erabiltzailea index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>Deparment</th>
+                <th>Displayname</th>
+                <th>Dn</th>
+                <th>Enabled</th>
+                <th>Firstname</th>
+                <th>Hizkuntza</th>
+                <th>Lanpostua</th>
+                <th>Ldapsaila</th>
+                <th>Nan</th>
+                <th>Notes</th>
+                <th>Sailburuada</th>
+                <th>Email</th>
+                <th>Surname</th>
+                <th>LdapTaldeak</th>
+                <th>LdapRolak</th>
+                <th>Password</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for erabiltzailea in erabiltzaileas %}
+            <tr>
+                <td>{{ erabiltzailea.id }}</td>
+                <td>{{ erabiltzailea.username }}</td>
+                <td>{{ erabiltzailea.roles ? erabiltzailea.roles|json_encode : '' }}</td>
+                <td>{{ erabiltzailea.deparment }}</td>
+                <td>{{ erabiltzailea.displayname }}</td>
+                <td>{{ erabiltzailea.dn }}</td>
+                <td>{{ erabiltzailea.enabled ? 'Yes' : 'No' }}</td>
+                <td>{{ erabiltzailea.firstname }}</td>
+                <td>{{ erabiltzailea.hizkuntza }}</td>
+                <td>{{ erabiltzailea.lanpostua }}</td>
+                <td>{{ erabiltzailea.ldapsaila }}</td>
+                <td>{{ erabiltzailea.nan }}</td>
+                <td>{{ erabiltzailea.notes }}</td>
+                <td>{{ erabiltzailea.sailburuada ? 'Yes' : 'No' }}</td>
+                <td>{{ erabiltzailea.email }}</td>
+                <td>{{ erabiltzailea.surname }}</td>
+                <td>{{ erabiltzailea.ldapTaldeak ? erabiltzailea.ldapTaldeak|json_encode : '' }}</td>
+                <td>{{ erabiltzailea.ldapRolak ? erabiltzailea.ldapRolak|json_encode : '' }}</td>
+                <td>{{ erabiltzailea.Password }}</td>
+                <td>
+                    <a href="{{ path('erabiltzailea_show', {'id': erabiltzailea.id}) }}">show</a>
+                    <a href="{{ path('erabiltzailea_edit', {'id': erabiltzailea.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="20">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('erabiltzailea_new') }}">Create new</a>
+{% endblock %}

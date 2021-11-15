@@ -108,9 +108,15 @@ class KontratuaLote
      */
     private $prorroga3;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="lote", orphanRemoval=true)
+     */
+    private $notifications;
+
     public function __construct()
     {
         $this->alarmak = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
     
     /******************************************************************************************************************/
@@ -328,6 +334,36 @@ class KontratuaLote
     public function setProrroga3(?\DateTimeInterface $prorroga3): self
     {
         $this->prorroga3 = $prorroga3;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setLote($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getLote() === $this) {
+                $notification->setLote(null);
+            }
+        }
 
         return $this;
     }

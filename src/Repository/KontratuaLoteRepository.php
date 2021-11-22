@@ -64,9 +64,6 @@ class KontratuaLoteRepository extends ServiceEntityRepository
         }
         $qb->andWhere($andStatements);
 
-
-        dump($qb->getQuery()->getSQL());
-
         return $qb->getQuery()->getResult();
     }
 }

@@ -46,7 +46,7 @@ require("bootstrap-datepicker/dist/js/bootstrap-datepicker.min");
 require("bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min")
 require("bootstrap-datepicker/dist/locales/bootstrap-datepicker.eu.min")
 require("bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.min.css")
-
+require('eonasdan-bootstrap-datetimepicker')
 const adminlte = require('admin-lte');
 
 const routes = require('../public/js/fos_js_routes.json');
@@ -68,13 +68,42 @@ $(function () {
         });
     });
 
+    $('body').on('focus',".datetimepicker", function(){
+        $(this).datetimepicker({
+            inline: true,
+            locale: "eu",
+            sideBySide: true
+        });
+    });
+
     $('body').on('DOMNodeInserted', 'select', function () {
-        console.log("JJ");
         $(this).select2({ width: '100%' });
     });
 
     $('.select2').select2({ width: '100%' });
 
+    $('#cmbKontratua').on('select2:select', function (e) {
+        const data = e.params.data;
+        const url = Routing.generate('api_contracts_get_item',{ 'id': data.id })
+
+        $('#notification_lote').empty();
+        $('#notification_lote').select2("destroy");
+        $('#notification_lote').select2({
+            ajax: {
+                url: url,
+                dataType: 'json',
+                processResults: function (data) {
+                    return {
+                        results: $.map(data.lotes, function(obj) {
+                            return { id: obj.id, text: obj.name };
+                        })
+                    };
+                }
+            }
+        });
+
+
+    });
 
     $('.btnModalNewLote').on('click', function () {
         const $kontratuid = $(this).data('kontratuid');

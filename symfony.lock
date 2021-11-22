@@ -1,4 +1,18 @@
 {
+    "api-platform/core": {
+        "version": "2.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "05b57782a78c21a664a42055dc11cf1954ca36bb"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
     "beberlei/doctrineextensions": {
         "version": "v1.3.0"
     },
@@ -103,6 +117,9 @@
     "fakerphp/faker": {
         "version": "v1.16.0"
     },
+    "fig/link-util": {
+        "version": "1.1.2"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
@@ -139,6 +156,18 @@
     "monolog/monolog": {
         "version": "2.3.5"
     },
+    "nelmio/cors-bundle": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
+    },
     "nesbot/carbon": {
         "version": "2.54.0"
     },
@@ -161,6 +190,9 @@
         "version": "1.1.2"
     },
     "psr/event-dispatcher": {
+        "version": "1.0.0"
+    },
+    "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
@@ -471,6 +503,9 @@
     "symfony/var-exporter": {
         "version": "v5.3.8"
     },
+    "symfony/web-link": {
+        "version": "v5.3.4"
+    },
     "symfony/web-profiler-bundle": {
         "version": "5.3",
         "recipe": {
@@ -524,6 +559,9 @@
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"
+    },
+    "willdurand/negotiation": {
+        "version": "3.0.0"
     },
     "zenstruck/assert": {
         "version": "v1.0.0"

@@ -19,6 +19,15 @@ class KontratuaRepository extends ServiceEntityRepository
         parent::__construct($registry, Kontratua::class);
     }
 
+    public function getAllSortedByName()
+    {
+        $qm = $this->createQueryBuilder('k')
+            ->orderBy('k.izena_eus')
+        ;
+
+        return $qm->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Kontratua[] Returns an array of Kontratua objects
     //  */

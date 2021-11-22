@@ -1,52 +1,81 @@
 
-    <table class="table table-bordered table-striped table-hover text-nowrap">
-        <thead>
-            <tr>
-                {#<th>Id</th>#}
-                <th>Lote</th>
-                <th>Aurrekontua</th>
-                <th>Adjudikazioa</th>
-                <th>Sinadura</th>
-                <th>Iraupena</th>
-                <th>Amaitua</th>
-                <th>Prorroga 1</th>
-                <th>Prorroga 2</th>
-                <th>Prorroga 3</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for kontratua_lote in kontratua_lotes %}
-            <tr>
-                <td>{{ kontratua_lote.name }}</td>
-                <td class="text-right">{{ kontratua_lote.aurrekontuaIva | format_currency('EUR') }}</td>
-                <td class="text-right">{{ kontratua_lote.adjudikazioaIva | format_currency('EUR')  }}</td>
-                <td class="text-center">{{ kontratua_lote.sinadura ? kontratua_lote.sinadura|date('Y-m-d') : '' }}</td>
-                <td class="text-center">{{ kontratua_lote.fetxaIraupena ? kontratua_lote.fetxaIraupena|date('Y-m-d') : '' }}</td>
-                <td>{% if kontratua_lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
-                <td class="text-center">{{ kontratua_lote.prorroga1 ? kontratua_lote.prorroga1|date('Y-m-d') : '' }}</td>
-                <td class="text-center">{{ kontratua_lote.prorroga2 ? kontratua_lote.prorroga2|date('Y-m-d') : '' }}</td>
-                <td class="text-center">{{ kontratua_lote.prorroga3 ? kontratua_lote.prorroga3|date('Y-m-d') : '' }}</td>
-                <td class="text-center">
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-{#                            <a class="btn btn-xs btn-primary" href="{{ path('saila_edit', {'id': saila.id}) }}"><i class="fas fa-edit"></i></a>#}
-{#                            <a class="btnLoteEditInModal" href="{{ path('kontratua_lote_edit', {'id': kontratua_lote.id}) }}"><i class="fas fa-edit"></i></a>#}
-                            <a data-id="{{ kontratua_lote.id }}" class="btnLoteEditInModal" href="#"><i class="fas fa-edit"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            {{ include('kontratua_lote/_delete_form.html.twig') }}
-                        </li>
-                        <li>
-                            <a href=""></a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">{{ "no records found" | trans}}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-hover text-nowrap">
+                <thead>
+                <tr>
+                    {#<th>Id</th>#}
+                    <th>Lote</th>
+                    <th>Aurrekontua</th>
+                    <th>Adjudikazioa</th>
+                    <th>Sinadura</th>
+                    <th>Iraupena</th>
+                    <th>Amaitua</th>
+                    <th>Prorroga 1</th>
+                    <th>Prorroga 2</th>
+                    <th>Prorroga 3</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for kontratua_lote in kontratua_lotes %}
+                    <tr>
+                        <td>{{ kontratua_lote.name }}</td>
+                        <td class="text-right">{{ kontratua_lote.aurrekontuaIva | format_currency('EUR') }}</td>
+                        <td class="text-right">{{ kontratua_lote.adjudikazioaIva | format_currency('EUR')  }}</td>
+                        <td class="text-center">{{ kontratua_lote.sinadura ? kontratua_lote.sinadura|date('Y-m-d') : '' }}</td>
+                        <td class="text-center">{{ kontratua_lote.fetxaIraupena ? kontratua_lote.fetxaIraupena|date('Y-m-d') : '' }}</td>
+                        <td>{% if kontratua_lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
+                        <td class="text-center">{{ kontratua_lote.prorroga1 ? kontratua_lote.prorroga1|date('Y-m-d') : '' }}</td>
+                        <td class="text-center">{{ kontratua_lote.prorroga2 ? kontratua_lote.prorroga2|date('Y-m-d') : '' }}</td>
+                        <td class="text-center">{{ kontratua_lote.prorroga3 ? kontratua_lote.prorroga3|date('Y-m-d') : '' }}</td>
+                        <td class="text-center">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a data-id="{{ kontratua_lote.id }}" class="btnLoteEditInModal" href="#"><i class="fas fa-edit"></i></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    {{ include('kontratua_lote/_delete_form.html.twig') }}
+                                </li>
+                                <li class="list-inline-item">
+                                    {% if not kontratua_lote.notifications %}
+                                        <a href="{{ path('notification_new') }}" class="btn btn-primary">
+                                            <i class="fas fa-bell"></i>
+                                        </a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">{{ "no records found" | trans}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{#    <div class="modal fade" id="modalLoteCrud">#}
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Alarmak</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body divAlarmList">
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-close"></i>&nbsp;{{ "Irten" | trans}}</button>
+                    <button type="button" class="btn btn-primary btnModalSaveLoteButton"><i class="fas fa-save"></i>&nbsp;{{ "Save" | trans}}</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+{#    </div>#}
+    <!-- /.modal -->

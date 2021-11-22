@@ -104,57 +104,54 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                <i class="flag-icon flag-icon-us"></i>
+                <i class="fas fa-language"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right p-0" style="left: inherit; right: 0px;">
                 <a href="#" class="dropdown-item active">
-                    <i class="flag-icon flag-icon-us mr-2"></i> English
+                    <i class="flag-icon flag-icon-us mr-2"></i> Euskara
                 </a>
                 <a href="#" class="dropdown-item">
-                    <i class="flag-icon flag-icon-de mr-2"></i> German
-                </a>
-                <a href="#" class="dropdown-item">
-                    <i class="flag-icon flag-icon-fr mr-2"></i> French
-                </a>
-                <a href="#" class="dropdown-item">
-                    <i class="flag-icon flag-icon-es mr-2"></i> Spanish
+                    <i class="flag-icon flag-icon-de mr-2"></i> Castellano
                 </a>
             </div>
         </li>
         <li class="nav-item dropdown user-menu show">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 {#                <img src="../../dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image">#}
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                {% if app.user %}
+                    <span class="d-none d-md-inline">{{ app.user.displayname }}</span>
+                {% endif %}
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
                 <!-- User image -->
                 <li class="user-header bg-primary">
 {#                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">#}
-
-                    <p>
-                        Alexander Pierce - Web Developer
-                        <small>Member since Nov. 2012</small>
-                    </p>
+                    {% if app.user %}
+                        <p>
+                            {{ app.user.displayname }}
+                            <small>{{ app.user.lanpostua }}</small>
+                        </p>
+                    {% endif %}
                 </li>
                 <!-- Menu Body -->
-                <li class="user-body">
-                    <div class="row">
-                        <div class="col-4 text-center">
-                            <a href="#">Followers</a>
-                        </div>
-                        <div class="col-4 text-center">
-                            <a href="#">Sales</a>
-                        </div>
-                        <div class="col-4 text-center">
-                            <a href="#">Friends</a>
-                        </div>
-                    </div>
+{#                <li class="user-body">#}
+{#                    <div class="row">#}
+{#                        <div class="col-4 text-center">#}
+{#                            <a href="#">Followers</a>#}
+{#                        </div>#}
+{#                        <div class="col-4 text-center">#}
+{#                            <a href="#">Sales</a>#}
+{#                        </div>#}
+{#                        <div class="col-4 text-center">#}
+{#                            <a href="#">Friends</a>#}
+{#                        </div>#}
+{#                    </div>#}
                     <!-- /.row -->
-                </li>
+{#                </li>#}
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+                    <a href="#" class="btn btn-default btn-flat">Aukerak</a>
+                    <a href="#" class="btn btn-default btn-flat float-right">Irten</a>
                 </li>
             </ul>
         </li>

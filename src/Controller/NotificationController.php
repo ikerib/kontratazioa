@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Kontratua;
 use App\Entity\Notification;
 use App\Form\NotificationType;
 use App\Repository\NotificationRepository;
@@ -16,12 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class NotificationController extends AbstractController
 {
     /**
-     * @Route("/", name="notification_index", methods={"GET"})
+     * @Route("/list", name="notification_index", methods={"GET"})
      */
     public function index(NotificationRepository $notificationRepository): Response
     {
         return $this->render('notification/index.html.twig', [
             'notifications' => $notificationRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/lote/{loteid}", name="notification_by_lote", methods={"GET"})
+     */
+    public function lote(NotificationRepository $notificationRepository, $loteid): Response
+    {
+        return $this->render('notification/index.html.twig', [
+            'notifications' => $notificationRepository->getByLote($loteid),
         ]);
     }
 
@@ -42,19 +53,11 @@ class NotificationController extends AbstractController
             return $this->redirectToRoute('notification_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $kontratuak = $this->getDoctrine()->getRepository(Kontratua::class)->getAllSortedByName();
         return $this->renderForm('notification/new.html.twig', [
-            'notification' => $notification,
-            'form' => $form,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="notification_show", methods={"GET"})
-     */
-    public function show(Notification $notification): Response
-    {
-        return $this->render('notification/show.html.twig', [
-            'notification' => $notification,
+            'kontratuak'    => $kontratuak,
+            'notification'  => $notification,
+            'form'          => $form,
         ]);
     }
 
@@ -72,9 +75,11 @@ class NotificationController extends AbstractController
             return $this->redirectToRoute('notification_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $kontratuak = $this->getDoctrine()->getRepository(Kontratua::class)->getAllSortedByName();
         return $this->renderForm('notification/edit.html.twig', [
-            'notification' => $notification,
-            'form' => $form,
+            'kontratuak'    => $kontratuak,
+            'notification'  => $notification,
+            'form'          => $form,
         ]);
     }
 

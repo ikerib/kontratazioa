@@ -53,10 +53,21 @@ const routes = require('../public/js/fos_js_routes.json');
 import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
 Routing.setRoutingData(routes);
-
+window.routing = Routing
 
 $(function () {
     const appLocale = $('#appLocale').val()
+
+    $('.trSelect').on('click', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected').removeClass('bg-secondary');
+            $('#txtRow').val("")[0].dispatchEvent(new Event('input'));
+        }else {
+            $('tr.selected').removeClass('selected').removeClass('bg-secondary');
+            $(this).addClass('selected').addClass('bg-secondary');
+            $('#txtRow').val($(this).data('loteid'))[0].dispatchEvent(new Event('input'));
+        }
+    });
 
     $('body').on('focus',".datepicker", function(){
         $(this).datepicker({

@@ -1,16 +1,5 @@
 <template>
-  <div class="col-12" v-show="selectedRow">
-    <input id="txtRow" type="hidden" v-model="selectedRow">
-    <div class="card card-secondary">
-      <div class="card-header">
-        <h5 class="card-title m-0">Jakinazpenak: </h5>
-        <div class="card-tools">
-          <button v-on:click.stop.prevent="btnAddNotificationHandler" class="btn btn-default "><i class="fas fa-bell"></i> Berria</button>
-        </div>
-      </div>
 
-    </div>
-    <div class="card-body">
       <table class="table table-bordered">
         <thead>
         <tr class="d-flex">
@@ -27,18 +16,19 @@
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
+
 </template>
 
 <script>
 import axios from "axios";
 
 export default {
-  name: "Notification",
+  name: "NotificationList",
+  props: {
+    selectedRow: ''
+  },
   data: function() {
     return {
-      selectedRow:'',
       notifications: []
     }
   },
@@ -55,6 +45,9 @@ export default {
         console.log(result.data);
       })
     }
+  },
+  mounted() {
+    this.rowSelectHandler(this.selectedRow);
   },
   watch: {
     selectedRow: function(newVal, oldVal) {

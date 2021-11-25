@@ -9,9 +9,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     collectionOperations={"get"},
+ *     collectionOperations={"get", "post"},
  *     itemOperations={"get"},
- *     normalizationContext={"groups"={"notification:read"}},
+ *     normalizationContext={"groups"={"notification:read", "notification:write"}},
+ *     denormalizationContext={"groups"={"notification:write"}}
  * )
  * @ORM\Entity(repositoryClass=NotificationRepository::class)
  */
@@ -27,18 +28,20 @@ class Notification
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"notification:read"})
+     * @Groups({"notification:read", "notification:write"})
      */
     private $noiz;
 
     /**
      * @ORM\ManyToOne(targetEntity=KontratuaLote::class, inversedBy="notifications")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"notification:write"})
      */
     private $lote;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
+     * @Groups({"notification:write"})
      */
     private $user;
 

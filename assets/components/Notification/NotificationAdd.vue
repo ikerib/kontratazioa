@@ -1,64 +1,68 @@
 <template>
-  <div class="submit-form">
-    <div v-if="!submitted">
-      <div class="form-group">
-        <label for="title">Noiz</label>
-        <input
-            type="text"
-            class="form-control"
-            id="title"
-            required
-            v-model="notification.noiz"
-            name="title"
-        />
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="submit-form">
+<!--        <form @submit.prevent="saveNotification(notification)">-->
+          <div class="form-group">
+            <label>Noiz</label>
+            <date-picker v-model="date" :config="options"></date-picker>
+          </div>
+          <a v-on:click.stop="saveNotification" class="btn btn-success">Gorde</a>
+<!--        </form>-->
       </div>
-
-
-      <button @click="saveNotification" class="btn btn-success">Submit</button>
     </div>
-
-    <div v-else>
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newNotification">Add</button>
-    </div>
+    <div class="col-2"></div>
   </div>
 </template>
 
 <script>
+// import 'bootstrap/dist/css/bootstrap.css';
+
+// Import this component
+import datePicker from 'vue-bootstrap-datetimepicker';
+
+// Import date picker css
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
+import {mapActions} from "vuex";
 
 export default {
   name: "add-notifiation",
-  props: ['selectedRow'],
   data() {
     return {
-      notification: {
-        id: null,
-        noiz: ""
+      date: null,
+      options: {
+        // https://momentjs.com/docs/#/displaying/
+        format: 'DD/MM/YYYY HH:mm:ss',
+        sideBySide:true,
+        // inline:true,
+        useCurrent: false,
+        showClear: true,
+        showClose: true,
+        showTodayButton: true,
+        locale: 'eu'
       },
-      submitted: false
+      user: null,
+      aaa: null,
+      noiz: null
     };
   },
   methods: {
     saveNotification() {
       let data = {
-        noiz: this.notification.noiz
+        noiz: this.date,
+        user: "/api/users/" + this.user,
+        lote: "/api/lotes/" + this.$store.state.selectedRow
       };
-
-
-      // TutorialDataService.create(data)
-      //     .then(response => {
-      //       this.tutorial.id = response.data.id;
-      //       console.log(response.data);
-      //       this.submitted = true;
-      //     })
-      //     .catch(e => {
-      //       console.log(e);
-      //     });
+      console.log(data);
+      this.addNotification(data);
     },
 
-    newNotification() {
-      this.submitted = false;
-      this.notification = {};
+    ...mapActions(['addNotification'])
+  },
+  mounted() {
+    if (window.user) {
+      this.user = window.user;
     }
   }
 };
@@ -66,7 +70,12 @@ export default {
 
 <style>
 .submit-form {
-  max-width: 300px;
+  /*max-width: 600px;*/
   margin: auto;
 }
+
+.bootstrap-datetimepicker-widget.wider {
+  width: 100% !important;
+}
+
 </style>

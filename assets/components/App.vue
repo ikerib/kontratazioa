@@ -1,7 +1,8 @@
 <template>
   <div class="col-12" v-show="this.$store.state.selectedRow">
 <!--    <input id="txtRow" type="hidden" v-model="selectedRow">-->
-    <input id="txtRow" :value="selectedRow" @input="selectedRowHandler">
+    <input id="txtRow" type="hidden" :value="selectedRow" @input="selectedRowHandler">
+
     <div class="card card-secondary">
       <div class="card-header">
         <h5 class="card-title m-0">Jakinazpenak: </h5>
@@ -39,10 +40,8 @@ export default {
   methods: {
     selectedRowHandler(event) {
       if (event.target.value !== "") {
-        console.log("INI selectedRowHandler")
         this.$store.commit('SELECT_ROW', event.target.value);
         this.$store.dispatch('fetchNotifications');
-        console.log("FIN selectedRowHandler")
       }
     }
   }

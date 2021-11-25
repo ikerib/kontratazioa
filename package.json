@@ -18,6 +18,7 @@
         "file-loader": "^6.0.0",
         "jsgrid": "^1.5.3",
         "jszip": "^3.7.1",
+        "moment": "^2.29.1",
         "pdfmake": "^0.2.2",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.41.0",
@@ -45,6 +46,7 @@
         "axios": "^0.24.0",
         "eonasdan-bootstrap-datetimepicker": "^4.17.49",
         "luxon": "^2.1.1",
+        "vue-bootstrap-datetimepicker": "^5.0.1",
         "vue-luxon": "^0.10.0"
     }
 }

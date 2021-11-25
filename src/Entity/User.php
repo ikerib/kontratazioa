@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ *
+ * @ApiResource (
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ *     normalizationContext={"groups"={"user:read"}},
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface
@@ -110,6 +117,11 @@ class User implements UserInterface
      */
     private $Password;
 
+    /************************************************************************************************************************************************************/
+    /************************************************************************************************************************************************************/
+    /************************************************************************************************************************************************************/
+
+
     /**
      * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="user")
      */
@@ -119,6 +131,12 @@ class User implements UserInterface
     {
         $this->notifications = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->username;
+    }
+
     /************************************************************************************************************************************************************/
     /************************************************************************************************************************************************************/
     /************************************************************************************************************************************************************/
@@ -172,11 +190,6 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
-    }
-
-    public function __toString()
-    {
-        return $this->getUsername();
     }
 
     public function getId(): ?int

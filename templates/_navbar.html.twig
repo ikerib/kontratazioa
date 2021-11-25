@@ -119,6 +119,13 @@
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 {#                <img src="../../dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2" alt="User Image">#}
                 {% if app.user %}
+
+                    {{ dump(app.user.id) }}
+
+
+                    <script>
+                        window.user = {{ app.user.id }}
+                    </script>
                     <span class="d-none d-md-inline">{{ app.user.displayname }}</span>
                 {% endif %}
             </a>

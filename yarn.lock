@@ -1704,7 +1704,7 @@ bootstrap@^3.3:
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.4.1.tgz#c3a347d419e289ad11f4033e3c4132b87c081d72"
   integrity sha512-yN5oZVmRCwe5aKwzRj6736nSmKDX7pLYwsXiCj/EYmo16hODaBiT4En5btW/jhBF/seV+XMx3aYwukYC3A49DA==
 
-bootstrap@^4.5.2, bootstrap@^4.6.0:
+bootstrap@^4.0.0-beta.2, bootstrap@^4.5.2, bootstrap@^4.6.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.1.tgz#bc25380c2c14192374e8dec07cf01b2742d222a2"
   integrity sha512-0dj+VgI9Ecom+rvvpNZ4MUZJz8dcX7WCX+eTID9+/8HgOkv3dsRzi8BGeZJCQU6flWQVYxwTQnEZFrmJSEO7og==
@@ -3792,7 +3792,7 @@ jquery-validation@^1.19.3:
   resolved "https://registry.yarnpkg.com/jquery-validation/-/jquery-validation-1.19.3.tgz#50b350eba8b02bcfd119ba15f199487b7eb64086"
   integrity sha512-iXxCS5W7STthSTMFX/NDZfWHBLbJ1behVK3eAgHXAV8/0vRa9M4tiqHvJMr39VGWHMGdlkhrtrkBuaL2UlE8yw==
 
-jquery@>=1.10, jquery@>=1.12.0, jquery@>=1.7, "jquery@>=1.7.1 <4.0.0", jquery@>=2.2, "jquery@^3.0 || ^2.0 || ^1.0", jquery@^3.4.0, jquery@^3.5.1, jquery@^3.6.0:
+jquery@>=1.10, jquery@>=1.12.0, jquery@>=1.7, "jquery@>=1.7.1 <4.0.0", jquery@>=2.2, "jquery@^1.8.3 || ^2.0 || ^3.0", "jquery@^3.0 || ^2.0 || ^1.0", jquery@^3.4.0, jquery@^3.5.1, jquery@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
@@ -4460,6 +4460,16 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+pc-bootstrap4-datetimepicker@^4.17.50:
+  version "4.17.51"
+  resolved "https://registry.yarnpkg.com/pc-bootstrap4-datetimepicker/-/pc-bootstrap4-datetimepicker-4.17.51.tgz#874614b1f3038d439e6106ef8bba8f015913e72d"
+  integrity sha512-UQDSKS5d1c43btk2vQ4siiv9YIkscZYQfTE513abeTqh5PIOJiyAeNdoCSTsDTZcpWJtWZHWk15yDXypYSFzcQ==
+  dependencies:
+    bootstrap "^4.0.0-beta.2"
+    jquery "^1.8.3 || ^2.0 || ^3.0"
+    moment "^2.10"
+    moment-timezone "^0.4.0"
 
 pdfkit@>=0.8.1:
   version "0.13.0"
@@ -5904,6 +5914,13 @@ vue-axios@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-3.4.0.tgz#059d7fcbe83f786cda24e9501317174736927b37"
   integrity sha512-S3YTCJeEndzmtaYzyz919Z54wY1D2OftWEhioGbHED3VUSta8ti0OHjDipTPkb1StxOzQLAAO2hSUq830i14KA==
+
+vue-bootstrap-datetimepicker@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/vue-bootstrap-datetimepicker/-/vue-bootstrap-datetimepicker-5.0.1.tgz#ea127ba9341a7d35b57942602cafc51226119a45"
+  integrity sha512-jao7sWXHgKzjbOio97u7kEfB/FJMWJ5rhsc4q8iNTOLCULfSJ5m3AZ2qZh62dNcMA4/uuTW6m6tONYIith/2XQ==
+  dependencies:
+    pc-bootstrap4-datetimepicker "^4.17.50"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

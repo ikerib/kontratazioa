@@ -1,6 +1,14 @@
 import './styles/vue.scss'
 
 import Vue from 'vue';
+import Vuex from 'vuex';
+Vue.use(Vuex);
+
+import axios from 'axios';
+import VueAxios from "vue-axios";
+Vue.use(VueAxios, axios);
+
+
 import App from './components/App'
 import VueLuxon from "vue-luxon";
 Vue.use(VueLuxon, {
@@ -20,9 +28,12 @@ const rutas = new vueRouter({
     linkExactActiveClass: "active"
 });
 
+import store from './components/store'
+
 new Vue({
     components: { App },
     template: "<App/>",
-    router: rutas
+    router: rutas,
+    store: store
 }).$mount("#app");
 

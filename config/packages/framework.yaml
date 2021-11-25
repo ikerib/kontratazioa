@@ -12,11 +12,34 @@ framework:
 #        cookie_samesite: lax
 #        storage_factory_id: session.storage.factory.native
     session:
+        enabled: true
         handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+        cookie_secure: auto
+        cookie_samesite: lax
+        cookie_lifetime: 31536000
+
     #esi: true
     #fragments: true
     php_errors:
         log: true
+
+    cache:
+        # Unique name of your app: used to compute stable namespaces for cache keys.
+        prefix_seed: kontrataziocache
+        # The "app" cache stores to the filesystem by default.
+        # The data in this cache should persist between deploys.
+        # Other options include:
+
+        # Redis
+        app: cache.adapter.redis
+        default_redis_provider: 'redis://%env(REDIS_HOST)%:%env(REDIS_PORT)%'
+          #default_redis_provider: redis://localhost:6379
+          # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
+          #app: cache.adapter.apcu
+
+          # Namespaced pools use the above "app" backend by default
+        #pools:
+        #my.dedicated.cache: null
 
 when@test:
     framework:

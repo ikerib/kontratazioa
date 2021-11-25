@@ -1,5 +1,4 @@
 <template>
-
       <table class="table table-bordered">
         <thead>
         <tr class="d-flex">
@@ -21,39 +20,39 @@
 
 <script>
 import axios from "axios";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "NotificationList",
-  props: {
-    selectedRow: ''
+  computed: mapGetters({
+    notifications: 'allNotifications'
+  }),
+  methods:{
+    ...mapActions(["fetchNotifications"]),
   },
-  data: function() {
-    return {
-      notifications: []
-    }
-  },
-  methods: {
-    btnAddNotificationHandler() {
-      console.log("kk");
-    },
-    rowSelectHandler(id){
-      const url = routing.generate('api_lotes_notifications_get_subresource', { id: id });
-      console.log(url);
-      axios.get(url+".json").then((result) => {
-        this.notifications = result.data;
 
-        console.log(result.data);
-      })
-    }
-  },
-  mounted() {
-    this.rowSelectHandler(this.selectedRow);
-  },
-  watch: {
-    selectedRow: function(newVal, oldVal) {
-      this.rowSelectHandler(newVal);
-    }
-  }
+  // methods: {
+  //   btnAddNotificationHandler() {
+  //     console.log("kk");
+  //   },
+  //   rowSelectHandler(id){
+  //     const url = routing.generate('api_lotes_notifications_get_subresource', { id: id });
+  //     console.log(url);
+  //     axios.get(url+".json").then((result) => {
+  //       this.notifications = result.data;
+  //
+  //       console.log(result.data);
+  //     })
+  //   }
+  // },
+  // mounted() {
+  //   this.rowSelectHandler(this.selectedRow);
+  // },
+  // watch: {
+  //   selectedRow: function(newVal, oldVal) {
+  //     this.rowSelectHandler(newVal);
+  //   }
+  // }
 }
 </script>
 

@@ -33,8 +33,8 @@ build:
 	rm -fr ~/docker_temp/app/.git/
 	rm -fr ~/docker_temp/app/.idea/
 	rm -fr ~/docker_temp/app/fitxategiak/
-	rm -fr ~/docker_temp/app/node_modules/
-	rm -fr ~/docker_temp/app/vendor/
+	#rm -fr ~/docker_temp/app/node_modules/
+	#rm -fr ~/docker_temp/app/vendor/
 	rm -fr ~/docker_temp/app/tmp/
 	@echo
 	@echo
@@ -49,7 +49,7 @@ build:
 	@echo '-------------------'
 	@echo 'Process finished OK'
 	@echo '-------------------'
-	
+
 
 deploy: build
 	#	Dockerfile available args
@@ -59,7 +59,7 @@ deploy: build
 	#	ARG DOCKER_TIMEZONE=Europe/Madrid
 
 	# docker build -t ${DOCKER_REPO_APP} --file=docker/prod/php/Dockerfile .
-	
+
 	#docker build --force-rm -t ${DOCKER_REPO_NGINX} --file=docker/prod/nginx/Dockerfile .
 	#docker push ${DOCKER_REPO_NGINX}
 	docker push ${DOCKER_REPO_APP}

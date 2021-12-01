@@ -2,9 +2,9 @@
 .idea
 .env
 .env.prod
-node_modules
+#node_modules
 var
-vendor
+#vendor
 tmp
 public/uploads
 storage/framework/cache/**

@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     collectionOperations={"get", "post"},
- *     itemOperations={"get"},
+ *     itemOperations={"get", "put", "delete"},
  *     normalizationContext={"groups"={"notification:read", "notification:write"}},
  *     denormalizationContext={"groups"={"notification:write"}}
  * )

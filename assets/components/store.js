@@ -4,12 +4,14 @@ import axios from "axios";
 import { DateTime } from "luxon";
 import moment from "moment";
 Vue.use(Vuex)
+import Swal from "sweetalert2";
 export default new Vuex.Store({
 
     state:{
         isLoading: false,
         selectedRow: '',
-        notitications: []
+        notitications: [],
+        notification: null
     },
     mutations: {
         SELECT_ROW: function(state, payload) {
@@ -25,6 +27,12 @@ export default new Vuex.Store({
     getters: {
         allNotifications: (state) => {
             return state.notitications;
+        },
+        getNotifyById: (state) => (id) => {
+            console.log("STORE ID")
+            console.log(id);
+            console.log(state.notitications);
+            return state.notitications.find(n => n.id === parseInt(id))
         }
     },
     actions: {
@@ -39,37 +47,61 @@ export default new Vuex.Store({
                         commit('SET_IS_LOADING', false);
                     }).catch(err => {
                         commit('SET_IS_LOADING', false);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Zerbait oker joan da.',
+                            footer: err.message
+                        });
                     });
             }
         },
         async addNotification(context,data) {
-            console.log(context);
-            console.log('addNotification ini');
-            // data.noiz = "2021-11-25 10:42:02.000";
-            console.log(data);
-            console.log('addNotification fin');
-
             const dat =DateTime.fromFormat(data.noiz,'DD/MM/YYYY HH:mm:ss');
             const da = moment(data.noiz, 'DD/MM/YYYY HH:mm:ss');
-            console.log('dat')
-            console.log(dat);
-            console.log(da);
-
-            console.log(dat.toFormat('YYYY-MM-DD HH:mm:ss'));
             data.noiz = da.format('YYYY-MM-DD HH:mm:ss');
-            console.log('datadata')
-            console.log(data)
-            // console.log(dat.toISO());
-            // data.noiz = dat.toFormat('DD/MM/YYYY H:mm:ss')
             const url = routing.generate('api_notifications_post_collection');
-            console.log(url);
-            console.log(data);
             await axios.post(url,data)
                 .then (res => {
-                    console.log('on')
                     context.dispatch('fetchNotifications');
                 }).catch(err => {
-                    console.log('error', err);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Zerbait oker joan da.',
+                        footer: err.message
+                    });
+                });
+        },
+        async putNotification(context, data) {
+            const dat =DateTime.fromFormat(data.noiz,'DD/MM/YYYY HH:mm:ss');
+            const da = moment(data.noiz, 'DD/MM/YYYY HH:mm:ss');
+            data.noiz = da.format('YYYY-MM-DD HH:mm:ss');
+            const url = routing.generate('api_notifications_put_item', { 'id': data.id});
+            await axios.put(url,data)
+                .then (res => {
+                    context.dispatch('fetchNotifications');
+                }).catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Zerbait oker joan da.',
+                        footer: err.message
+                    });
+                });
+        },
+        async deleteNotification ( context, data ) {
+            const url = routing.generate('api_notifications_delete_item', { 'id': data});
+            await axios.delete(url,data)
+                .then (res => {
+                    context.dispatch('fetchNotifications');
+                }).catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Zerbait oker joan da.',
+                        footer: err.message
+                    });
                 });
         }
     }

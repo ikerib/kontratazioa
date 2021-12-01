@@ -17,22 +17,21 @@ Vue.use(VueLuxon, {
         format: "iso"
     },
     output: {
-        zone: "local",
+        zone: "utc",
         format: "YYYY-MM-DD HH:mm:ss",
         locale: "eu",
-
     }
 });
 
 import vueRouter from 'vue-router'
-import router from "./components/router";
-Vue.use(vueRouter);
+import routes from "./components/router";
+const router = new vueRouter({
 
-const rutas = new vueRouter({
-    routes: router,
+    routes,
     linkActiveClass: "active",
     linkExactActiveClass: "active"
 });
+Vue.use(vueRouter);
 
 import store from './components/store'
 import VueBootstrapDatetimePicker from 'vue-bootstrap-datetimepicker'
@@ -57,7 +56,7 @@ $.extend(true, $.fn.datetimepicker.defaults, {
 new Vue({
     components: { App },
     template: "<App/>",
-    router: rutas,
+    router,
     store: store
 }).$mount("#app");
 

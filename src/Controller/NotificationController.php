@@ -27,6 +27,16 @@ class NotificationController extends AbstractController
     }
 
     /**
+     * @Route("/header", name="notification_header", methods={"GET"})
+     */
+    public function header(NotificationRepository $notificationRepository): Response
+    {
+        return $this->render('notification/_notifications.html.twig', [
+            'notifications' => $notificationRepository->getAllNotifications(),
+        ]);
+    }
+
+    /**
      * @Route("/lote/{loteid}", name="notification_by_lote", methods={"GET"})
      */
     public function lote(NotificationRepository $notificationRepository, $loteid): Response

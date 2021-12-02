@@ -46,9 +46,14 @@ class Notification
     private $user;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $notified=0;
+    private $notify=0;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $emailed=0;
 
     public function getId(): ?int
     {
@@ -99,6 +104,30 @@ class Notification
     public function setNotified(bool $notified): self
     {
         $this->notified = $notified;
+
+        return $this;
+    }
+
+    public function getEmailed(): ?bool
+    {
+        return $this->emailed;
+    }
+
+    public function setEmailed(bool $emailed): self
+    {
+        $this->emailed = $emailed;
+
+        return $this;
+    }
+
+    public function getNotify(): ?bool
+    {
+        return $this->notify;
+    }
+
+    public function setNotify(?bool $notify): self
+    {
+        $this->notify = $notify;
 
         return $this;
     }

@@ -10,16 +10,20 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class CheckNotifyCommand extends Command
 {
     protected static $defaultName = 'app:check-notify';
     protected static $defaultDescription = 'Jakinerazpenik dagoen begiratu, baldin badago bidali.';
     private EntityManagerInterface $entityManager;
+    private MailerInterface $mailer;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, MailerInterface $mailer)
     {
         $this->entityManager = $entityManager;
+        $this->mailer = $mailer;
 
         parent::__construct();
     }
@@ -46,18 +50,36 @@ class CheckNotifyCommand extends Command
             // ...
         }
 
-        $notifications = $this->entityManager->getRepository(Notification::class)->getAllUnNotified();
+        $notifications = $this->entityManager->getRepository(Notification::class)->getAllUnEmailedNotifications();
         $rows = [];
         /** @var Notification $notification */
         foreach ($notifications as $notification) {
             $fetxa = $notification->getNoiz()->format('Y-m-d');
+            $kontratuIzena = $notification->getLote()->getKontratua()->getIzenaEus();
+            $kontratuLote = $notification->getLote()->getName();
             $curr = date('Y-m-d');
             if ( $fetxa === $curr ) {
                 $io->writeln($notification->getLote() . ' ==> ' . $fetxa);
                 $row = [$notification->getLote(), $fetxa];
                 $rows[] = $row;
+                $email = (new Email())
+                    ->from('iibarguren@pasaia.net')
+                    ->to('iibarguren@pasaia.net')
+                    ->subject('Jakinarazpen berria. Oroigarria')
+                    ->text('Kaixo! Abixu berria duzu ondoko Kontratuarentzat:')
+                    ->html("
+                        <p>Kontratua: $kontratuIzena</p>
+                        <p>Lotea: $kontratuLote</p>
+                    ");
+
+                $this->mailer->send($email);
+                $notification->setEmailed(1);
+                $this->entityManager->persist($notification);
+                $this->entityManager->flush();
             }
         }
+
+
         $io->table(['Lote', 'Fetxa'], $rows);
 
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');

@@ -30,10 +30,18 @@ class NotificationRepository extends ServiceEntityRepository
         return $qm->getQuery()->getResult();
     }
 
-    public function getAllUnNotified()
+    public function getAllNotifications()
     {
         $qb = $this->createQueryBuilder('n')
-            ->andWhere('n.notified=0');
+            ->andWhere('n.notify=1');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getAllUnEmailedNotifications()
+    {
+        $qb = $this->createQueryBuilder('n')
+            ->andWhere('n.notify=1')->andWhere('n.emailed=0');
 
         return $qb->getQuery()->getResult();
     }

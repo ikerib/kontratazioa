@@ -13,3 +13,7 @@ ul {
 table.dataTable tr.dtrg-group td {
   background-color: #f2f2f3 !important;
 }
+.bg-opacity-25 {
+  --bs-bg-opacity: 0.25;
+  opacity: 0.5;
+}

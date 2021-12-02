@@ -24,16 +24,18 @@
                             <th>Noiz</th>
                             <th>Kontratua</th>
                             <th>Lotea</th>
+                            <th>Aktibo</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for notification in notifications %}
-                            <tr>
+                            <tr class="{% if notification.notify==1 %} bg-success p-2 text-dark bg-opacity-25 {% endif %}">
                                 <td>{{ notification.id }}</td>
                                 <td>{{ notification.noiz ? notification.noiz|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>{{ notification.lote.kontratua }}</td>
                                 <td>{{ notification.lote }}</td>
+                                <td>{{ notification.notify }}</td>
                                 <td>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">

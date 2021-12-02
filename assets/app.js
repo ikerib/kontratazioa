@@ -58,6 +58,20 @@ window.routing = Routing
 $(function () {
     const appLocale = $('#appLocale').val()
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams.get('do'));
+
+    if (urlParams.get('do')==='addLote') {
+        const loteid = urlParams.get('loteid');
+        const url = Routing.generate('kontratua_lote_edit', {'id': loteid});
+        $.get(url, function (data) {
+            $(".divLoteCrud").html(data);
+            $('.select2').select2({ width: '100%' });
+            $('#modalLoteCrud').modal();
+        });
+    }
+
     $('.trSelect').on('click', function () {
         if ( $(this).hasClass('selected') ) {
             $(this).removeClass('selected').removeClass('bg-secondary');

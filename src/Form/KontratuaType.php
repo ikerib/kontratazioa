@@ -18,13 +18,31 @@ class KontratuaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('espedientea')
-            ->add('izena_eus')
-            ->add('izena_es')
-            ->add('artxiboa')
+            ->add('espedientea', null, [
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ])
+            ->add('izena_eus', null, [
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ])
+            ->add('izena_es', null, [
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ])
+            ->add('artxiboa', null, [
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
+            ])
             ->add('espedienteElektronikoa', null, [
-
                 'label_attr' => ['class' => 'col-sm-4'],
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
             ])
 
             ->add('mota', EntityType::class, [

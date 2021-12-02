@@ -33,6 +33,8 @@ class KontratuaLoteRepository extends ServiceEntityRepository
     public function bilaketa($myFilters)
     {
         $qb = $this->createQueryBuilder('a');
+        $qb->select('a', 'k');
+        $qb->innerJoin('a.kontratua', 'k');
         $andStatements = $qb->expr()->andX();
         if ( count($myFilters) === 0 ) {
             return $qb->getQuery()->getResult();
@@ -63,6 +65,7 @@ class KontratuaLoteRepository extends ServiceEntityRepository
             }
         }
         $qb->andWhere($andStatements);
+        $qb->orderBy('a.id', 'DESC');
 
         return $qb->getQuery()->getResult();
     }

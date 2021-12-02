@@ -46,12 +46,12 @@ class KontratuaLote
     private $aurrekontuaIvaGabe;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $sinadura;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $iraupena;
 
@@ -71,12 +71,12 @@ class KontratuaLote
     private $adjudikazioaIvaGabe;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $amaitua;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $luzapena;
 

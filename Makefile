@@ -58,7 +58,7 @@ deploy: build
 	#	ARG GROUP_ID=1000
 	#	ARG DOCKER_TIMEZONE=Europe/Madrid
 
-	 docker build -t ${DOCKER_REPO_APP} --file=docker/prod/php/Dockerfile .
+	docker build -t ${DOCKER_REPO_APP} --file=docker/prod/php/Dockerfile .
 
 	docker build --force-rm -t ${DOCKER_REPO_NGINX} --file=docker/prod/nginx/Dockerfile .
 	docker push ${DOCKER_REPO_NGINX}

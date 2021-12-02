@@ -50,7 +50,7 @@
                     <tbody>
                     {% for lote in loteak %}
                         <tr>
-                            <td><a href="{{ path('kontratua_edit', { 'id': lote.kontratua.id }) }}">{{ lote.kontratua.espedientea }}</a></td>
+                            <td><a href="{{ path('kontratua_edit', { 'id': lote.kontratua.id }) }}">{{ lote.kontratua.espedientea }} - {{ lote.kontratua.izenaEus }}</a></td>
                             <td>{{ lote.name }}</td>
                             <td>{{ lote.kontratua.izenaEus }}</td>
                             <td class="text-center">{{ lote.sinadura ? lote.sinadura|date('Y-m-d') : '' }}</td>

@@ -68,9 +68,17 @@ class KontratuaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($kontratua);
+            $lote = new KontratuaLote();
+            $lote->setKontratua($kontratua);
+            $lote->setName('Lote1');
+            $entityManager->persist($lote);
             $entityManager->flush();
 
-            return $this->redirectToRoute('kontratua_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('kontratua_edit', [
+                'id' => $kontratua->getId(),
+                'do' => 'addLote',
+                'loteid' => $lote->getId()
+            ]);
         }
 
         return $this->renderForm('kontratua/new.html.twig', [

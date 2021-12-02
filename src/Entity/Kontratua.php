@@ -74,7 +74,7 @@ class Kontratua
 
     public function __toString()
     {
-        return $this->izena_eus;
+        return ''.$this->izena_eus;
     }
 
     /**
@@ -279,5 +279,5 @@ class Kontratua
         return $this;
     }
 
- 
+
 }

@@ -45,6 +45,11 @@ class Notification
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $notified=0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +87,18 @@ class Notification
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getNotified(): ?bool
+    {
+        return $this->notified;
+    }
+
+    public function setNotified(bool $notified): self
+    {
+        $this->notified = $notified;
 
         return $this;
     }

@@ -57,6 +57,7 @@ export default new Vuex.Store({
             }
         },
         async addNotification(context,data) {
+            console.log(data);
             const dat =DateTime.fromFormat(data.noiz,'DD/MM/YYYY HH:mm:ss');
             const da = moment(data.noiz, 'DD/MM/YYYY HH:mm:ss');
             data.noiz = da.format('YYYY-MM-DD HH:mm:ss');

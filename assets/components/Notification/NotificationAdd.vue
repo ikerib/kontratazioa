@@ -9,6 +9,7 @@
             <date-picker v-model="date" :config="options"></date-picker>
           </div>
           <a v-on:click.stop="saveNotification" class="btn btn-success">Gorde</a>
+          <a v-on:click.stop="cancelButton" class="btn btn-default">Ezeztatu</a>
 <!--        </form>-->
       </div>
     </div>
@@ -19,6 +20,7 @@
 <script>
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import {mapActions} from "vuex";
+import Swal from "sweetalert2";
 
 export default {
   name: "add-notifiation",
@@ -42,12 +44,24 @@ export default {
   },
   methods: {
     saveNotification() {
-      let data = {
-        noiz: this.date,
-        user: "/api/users/" + this.user,
-        lote: "/api/lotes/" + this.$store.state.selectedRow
-      };
-      this.addNotification(data);
+      if (this.date ==null) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Fetxa bat aukeratzea beharrezkoa da!'
+
+        })
+      } else {
+        let data = {
+          noiz: this.date,
+          user: "/api/users/" + this.user,
+          lote: "/api/lotes/" + this.$store.state.selectedRow
+        };
+        this.addNotification(data);
+        this.$router.push('/');
+      }
+    },
+    cancelButton() {
       this.$router.push('/');
     },
 

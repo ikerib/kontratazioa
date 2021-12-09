@@ -28,8 +28,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Kontratuak</h3>
+                <h3 class="card-title">Kontratuak alfabetikoki</h3>
                 <div class="card-tools">
+                    <a class="btn btn-outline-primary" href="{{ path('home') }}">Iraungitxe fetxa gertuen dunetak</a>
                     <a class="btn btn-outline-primary" href="{{ path('kontratua_new') }}">Kontratu berria</a>
                 </div>
             </div>
@@ -39,6 +40,7 @@
                         <tr>
                             <th>{{ "Espedientea" | trans}}</th>
                             <th>{{ "Lote" | trans}}</th>
+                            <th>{{ "Mota" | trans }}</th>
                             <th>{{ "Izena_eus" | trans}}</th>
                             <th>{{ "Sinadura" | trans}}</th>
                             <th>{{ "Iraupena" | trans}}</th>
@@ -52,13 +54,14 @@
                         <tr>
                             <td><a href="{{ path('kontratua_edit', { 'id': lote.kontratua.id }) }}">{{ lote.kontratua.espedientea }} - {{ lote.kontratua.izenaEus }}</a></td>
                             <td>{{ lote.name }}</td>
+                            <td>{{ lote.kontratua.mota }}</td>
                             <td>{{ lote.kontratua.izenaEus }}</td>
                             <td class="text-center">{{ lote.sinadura ? lote.sinadura|date('Y-m-d') : '' }}</td>
                             <td>{{ lote.iraupena }}</td>
                             <td>{% if lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
                             <td>{{ lote.luzapena }}</td>
                             <td class="text-center">
-                                <a href="{{ path('kontratua_edit', {'id': lote.id}) }}"><i class="fas fa-edit"></i></a>
+                                <a href="{{ path('kontratua_edit', {'id': lote.kontratua.id}) }}"><i class="fas fa-edit"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

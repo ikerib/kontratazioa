@@ -39,7 +39,7 @@ class MailCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $email = (new Email())
-            ->from('iibarguren@pasaia.net')
+            ->from('kontratazioa@pasaia.net')
             ->to('iibarguren@pasaia.net')
             ->subject('Jakinarazpen berria. Oroigarria')
             ->text('Froga bat da');

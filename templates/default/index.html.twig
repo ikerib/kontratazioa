@@ -39,9 +39,7 @@
                                 <td class="text-center">{{ lote.prorroga1 ? lote.prorroga1|date('Y-m-d') : '' }}</td>
                                 <td class="text-center">{{ lote.prorroga2 ? lote.prorroga2|date('Y-m-d') : '' }}</td>
                                 <td class="text-center">{{ lote.prorroga3 ? lote.prorroga3|date('Y-m-d') : '' }}</td>
-
                                 <td>{% if lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>
-
                                 <td class="text-center">
                                     <a href="{{ path('kontratua_edit', {'id': lote.kontratua.id}) }}"><i class="fas fa-edit"></i></a>
                                 </td>

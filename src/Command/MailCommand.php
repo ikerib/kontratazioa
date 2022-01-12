@@ -42,7 +42,11 @@ class MailCommand extends Command
             ->from('kontratazioa@pasaia.net')
             ->to('iibarguren@pasaia.net')
             ->subject('Jakinarazpen berria. Oroigarria')
-            ->text('Froga bat da');
+            ->text('Froga bat da')
+            ->html("
+                        <p>Kontratua: Hau eta hori</p>
+                        <p>Lotea: Lote hura</p>
+                    ");
 
         $this->mailer->send($email);
 

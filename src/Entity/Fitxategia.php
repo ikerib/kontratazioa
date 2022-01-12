@@ -31,6 +31,16 @@ class Fitxategia
      */
     private $fitxategimota;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Kontratua::class, inversedBy="fitxategiak")
+     */
+    private $kontratua;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=KontratuaLote::class, inversedBy="fitxategiak")
+     */
+    private $lotea;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,6 +66,30 @@ class Fitxategia
     public function setFitxategimota(?FitxategiMota $fitxategimota): self
     {
         $this->fitxategimota = $fitxategimota;
+
+        return $this;
+    }
+
+    public function getKontratua(): ?Kontratua
+    {
+        return $this->kontratua;
+    }
+
+    public function setKontratua(?Kontratua $kontratua): self
+    {
+        $this->kontratua = $kontratua;
+
+        return $this;
+    }
+
+    public function getLotea(): ?KontratuaLote
+    {
+        return $this->lotea;
+    }
+
+    public function setLotea(?KontratuaLote $lotea): self
+    {
+        $this->lotea = $lotea;
 
         return $this;
     }

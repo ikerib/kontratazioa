@@ -106,9 +106,15 @@ class Kontratua
      */
     private $artxiboa;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Fitxategia::class, mappedBy="kontratua")
+     */
+    private $fitxategiak;
+
     public function __construct()
     {
         $this->lotes = new ArrayCollection();
+        $this->fitxategiak = new ArrayCollection();
     }
 
     /******************************************************************************************************************/
@@ -278,6 +284,36 @@ class Kontratua
     public function setArtxiboa(?string $artxiboa): self
     {
         $this->artxiboa = $artxiboa;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Fitxategia[]
+     */
+    public function getFitxategiak(): Collection
+    {
+        return $this->fitxategiak;
+    }
+
+    public function addFitxategiak(Fitxategia $fitxategiak): self
+    {
+        if (!$this->fitxategiak->contains($fitxategiak)) {
+            $this->fitxategiak[] = $fitxategiak;
+            $fitxategiak->setKontratua($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFitxategiak(Fitxategia $fitxategiak): self
+    {
+        if ($this->fitxategiak->removeElement($fitxategiak)) {
+            // set the owning side to null (unless already changed)
+            if ($fitxategiak->getKontratua() === $this) {
+                $fitxategiak->setKontratua(null);
+            }
+        }
 
         return $this;
     }

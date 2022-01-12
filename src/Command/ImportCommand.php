@@ -37,10 +37,10 @@ class ImportCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->addArgument('fitxategia', InputArgument::REQUIRED, 'fitxategia')
+//        $this
+          //  ->addArgument('fitxategia', InputArgument::REQUIRED, 'fitxategia')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-        ;
+//        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

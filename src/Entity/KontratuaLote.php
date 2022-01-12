@@ -127,10 +127,16 @@ class KontratuaLote
      */
     private $notifications;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Fitxategia::class, mappedBy="lotea")
+     */
+    private $fitxategiak;
+
     public function __construct()
     {
         $this->alarmak = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->fitxategiak = new ArrayCollection();
     }
 
     /******************************************************************************************************************/
@@ -376,6 +382,36 @@ class KontratuaLote
             // set the owning side to null (unless already changed)
             if ($notification->getLote() === $this) {
                 $notification->setLote(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Fitxategia[]
+     */
+    public function getFitxategiak(): Collection
+    {
+        return $this->fitxategiak;
+    }
+
+    public function addFitxategiak(Fitxategia $fitxategiak): self
+    {
+        if (!$this->fitxategiak->contains($fitxategiak)) {
+            $this->fitxategiak[] = $fitxategiak;
+            $fitxategiak->setLotea($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFitxategiak(Fitxategia $fitxategiak): self
+    {
+        if ($this->fitxategiak->removeElement($fitxategiak)) {
+            // set the owning side to null (unless already changed)
+            if ($fitxategiak->getLotea() === $this) {
+                $fitxategiak->setLotea(null);
             }
         }
 

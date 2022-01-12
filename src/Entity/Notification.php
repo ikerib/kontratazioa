@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -18,6 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Notification
 {
+    Use TimestampableEntity;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

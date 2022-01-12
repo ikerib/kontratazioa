@@ -35,6 +35,7 @@ services:
             - './docker/dev/php/conf/.zsh_history:/home/www-data/.zsh_history:rw'
             - './docker/dev/php/conf/php.ini:/usr/local/etc/php/php.ini:ro'
             - './docker/dev/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro'
+            - './docker/uploads/:/usr/src/app/public/uploads'
         working_dir: /usr/src/app
 
     nginx:

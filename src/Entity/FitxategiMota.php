@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FitxategiMotaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -26,6 +28,16 @@ class FitxategiMota
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Fitxategia::class, mappedBy="fitxategimota")
+     */
+    private $fitxategiak;
+
+    public function __construct()
+    {
+        $this->fitxategiak = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -39,6 +51,36 @@ class FitxategiMota
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Fitxategia[]
+     */
+    public function getFitxategiak(): Collection
+    {
+        return $this->fitxategiak;
+    }
+
+    public function addFitxategiak(Fitxategia $fitxategiak): self
+    {
+        if (!$this->fitxategiak->contains($fitxategiak)) {
+            $this->fitxategiak[] = $fitxategiak;
+            $fitxategiak->setFitxategimota($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFitxategiak(Fitxategia $fitxategiak): self
+    {
+        if ($this->fitxategiak->removeElement($fitxategiak)) {
+            // set the owning side to null (unless already changed)
+            if ($fitxategiak->getFitxategimota() === $this) {
+                $fitxategiak->setFitxategimota(null);
+            }
+        }
 
         return $this;
     }

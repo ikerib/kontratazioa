@@ -26,6 +26,11 @@ class Fitxategia
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=FitxategiMota::class, inversedBy="fitxategiak")
+     */
+    private $fitxategimota;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -39,6 +44,18 @@ class Fitxategia
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFitxategimota(): ?FitxategiMota
+    {
+        return $this->fitxategimota;
+    }
+
+    public function setFitxategimota(?FitxategiMota $fitxategimota): self
+    {
+        $this->fitxategimota = $fitxategimota;
 
         return $this;
     }

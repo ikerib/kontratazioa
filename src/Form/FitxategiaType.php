@@ -13,9 +13,18 @@ class FitxategiaType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('fitxategimota')
-            ->add('kontratua')
-            ->add('lotea')
+            ->add('fitxategimota', null, [
+                'attr' => ['class' => 'form-control select2'],
+                'placeholder' => 'Aukeratu bat'
+            ])
+            ->add('kontratua', null, [
+                'attr' => ['class' => 'form-control select2'],
+                'placeholder' => 'Aukeratu bat'
+            ])
+            ->add('lotea', null, [
+                'attr' => ['class' => 'form-control select2'],
+                'placeholder' => 'Aukeratu bat'
+            ])
         ;
     }
 

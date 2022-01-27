@@ -1,4 +1,4 @@
-/*
+ /*
  * Welcome to your app's main JavaScript file!
  *
  * We recommend including the built version of this JavaScript file
@@ -54,6 +54,7 @@ import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/publi
 
 Routing.setRoutingData(routes);
 window.routing = Routing
+ const axios = require('axios');
 
 $(function () {
     const appLocale = $('#appLocale').val()
@@ -126,8 +127,6 @@ $(function () {
                 }
             }
         });
-
-
     });
 
     $('.btnModalNewLote').on('click', function () {
@@ -153,6 +152,7 @@ $(function () {
     $("#btnFrmFinderSubmit").on("click", function () {
         $("#frmFinder").submit();
     });
+
     $('#btnSaveButton').on('click', function () {
         $('#crudSubmitButton').trigger('click');
     });
@@ -371,6 +371,37 @@ $(function () {
             targets: [ 0],
             visible: false
         } ]
+    });
+
+    $('#fitxategia_kontratua').on('select2:select', function (e) {
+
+        const data = e.params.data;
+        const url = '/api/kontratuas/' + data.id + '.json';
+
+        $('#fitxategia_lotea').select2('data', null);
+        $('#fitxategia_lotea').select2({
+            ajax: {
+                url: url,
+                dataType: 'json'
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            }
+        });
+
+        $('#fitxategia_lotea').prop("disabled", false);
+
+        // console.log(url);
+        // axios.get(url)
+        //     .then(function (response) {
+        //         // handle success
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         // handle error
+        //         console.log(error);
+        //     })
+        //     .then(function () {
+        //         // always executed
+        //     });
     });
 
 });

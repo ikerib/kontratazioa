@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     collectionOperations={},
  *     itemOperations={"get"},
  *     normalizationContext={"groups"={"kontratua:read"}},
- *     shortName="contract"
+ *     shortName="Kontratua"
  * )
  * @ORM\Entity(repositoryClass=KontratuaRepository::class)
  */

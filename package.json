@@ -43,7 +43,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "axios": "^0.24.0",
+        "axios": "^0.25.0",
         "eonasdan-bootstrap-datetimepicker": "^4.17.49",
         "luxon": "^2.1.1",
         "vue-bootstrap-datetimepicker": "^5.0.1",

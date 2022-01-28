@@ -54,7 +54,7 @@ import Routing from '../vendor/friendsofsymfony/jsrouting-bundle/Resources/publi
 
 Routing.setRoutingData(routes);
 window.routing = Routing
- const axios = require('axios');
+const axios = require('axios');
 
 $(function () {
     const appLocale = $('#appLocale').val()
@@ -109,6 +109,7 @@ $(function () {
     $('.select2').select2({ width: '100%' });
 
     $('#cmbKontratua').on('select2:select', function (e) {
+        console.log("hemen")
         const data = e.params.data;
         const url = Routing.generate('api_contracts_get_item',{ 'id': data.id })
 
@@ -373,35 +374,6 @@ $(function () {
         } ]
     });
 
-    $('#fitxategia_kontratua').on('select2:select', function (e) {
 
-        const data = e.params.data;
-        const url = '/api/kontratuas/' + data.id + '.json';
-
-        $('#fitxategia_lotea').select2('data', null);
-        $('#fitxategia_lotea').select2({
-            ajax: {
-                url: url,
-                dataType: 'json'
-                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-            }
-        });
-
-        $('#fitxategia_lotea').prop("disabled", false);
-
-        // console.log(url);
-        // axios.get(url)
-        //     .then(function (response) {
-        //         // handle success
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         // handle error
-        //         console.log(error);
-        //     })
-        //     .then(function () {
-        //         // always executed
-        //     });
-    });
 
 });

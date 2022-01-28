@@ -53,3 +53,8 @@ services:
             - "%env(resolve:LDAP_KUDEATU_TALDEAK)%"
             - "%env(resolve:LDAP_USER_TALDEA)%"
             - '@Doctrine\ORM\EntityManagerInterface'
+
+    pasaia.vich.directory.namer:
+        class: App\Utils\VichDirectoryNamer
+        arguments: ['%kernel.project_dir%']
+        public: true

@@ -34,7 +34,8 @@ class FitxategiaType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Ezabatu',
                 'asset_helper' => true,
-                'download_label' => new PropertyPath('name'),
+                'disabled' => true,
+                'download_label' => 'Deskargatu fitxategia',
             ])
         ;
     }

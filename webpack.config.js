@@ -8,6 +8,7 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     .addEntry('app', './assets/app.js')
+    .addEntry('fitxategia', './assets/fitxategia.js')
     .addEntry('vue', './assets/vue.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()

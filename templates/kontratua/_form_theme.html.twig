@@ -5,8 +5,6 @@
         data-widget-counter="{{ value|length }}"
     >
         {% for key,productImageForm in form.children %}
-            {{ dump(key) }}
-            {{ dump(productImageForm) }}
             {{ form_widget(productImageForm) }}
 
         {% endfor %}
@@ -16,3 +14,4 @@
             class="add-another-collection-widget"
             data-list-selector="#kontratua-fitxategia-fields-list">Gehitu fitxategia</button>
 {% endblock %}
+

@@ -27,7 +27,7 @@ class Fitxategia
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -41,14 +41,14 @@ class Fitxategia
     private $uploadFile;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @var string|null
      */
     private $fileName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      *
      * @var int|null
      */
@@ -160,7 +160,7 @@ class Fitxategia
         return $this->fileName;
     }
 
-    public function setFileName(string $fileName): self
+    public function setFileName(?string $fileName): self
     {
         $this->fileName = $fileName;
 
@@ -172,7 +172,7 @@ class Fitxategia
         return $this->fileSize;
     }
 
-    public function setFileSize(int $fileSize): self
+    public function setFileSize(?int $fileSize): self
     {
         $this->fileSize = $fileSize;
 

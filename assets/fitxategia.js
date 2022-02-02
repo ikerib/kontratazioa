@@ -12,6 +12,7 @@ $(function () {
 
     $('#fitxategia_kontratua').on('select2:select', function (e) {
 
+        console.log('eeeeeeeeeeeeeeee')
 
     }).on('select2:close', function (e){
         const url = "/api/kontratuas/" + $(this).val() + ".json";

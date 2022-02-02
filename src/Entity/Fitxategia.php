@@ -88,7 +88,7 @@ class Fitxategia
     private $fitxategimota;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Kontratua::class, inversedBy="fitxategiak")
+     * @ORM\ManyToOne(targetEntity=Kontratua::class, inversedBy="fitxategiak", cascade={"persist"})
      */
     private $kontratua;
 

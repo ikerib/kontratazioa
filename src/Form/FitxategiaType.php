@@ -31,11 +31,13 @@ class FitxategiaType extends AbstractType
             ])
             ->add('uploadFile', VichFileType::class, [
                 'required' => true,
-                'allow_delete' => true,
-                'delete_label' => 'Ezabatu',
-                'asset_helper' => true,
-                'disabled' => true,
-                'download_label' => 'Deskargatu fitxategia',
+//                'allow_delete' => true,
+//                'delete_label' => 'Ezabatu',
+//                'asset_helper' => true,
+//                'disabled' => true,
+//                'download_label' => 'Deskargatu fitxategia',
+//                'image_uri' => true,
+
             ])
         ;
     }
@@ -44,6 +46,7 @@ class FitxategiaType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Fitxategia::class,
+            'block_prefix' => 'fitxategia_upload'
         ]);
     }
 }

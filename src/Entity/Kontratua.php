@@ -107,7 +107,7 @@ class Kontratua
     private $artxiboa;
 
     /**
-     * @ORM\OneToMany(targetEntity=Fitxategia::class, mappedBy="kontratua")
+     * @ORM\OneToMany(targetEntity=Fitxategia::class, mappedBy="kontratua", cascade={"persist"})
      */
     private $fitxategiak;
 

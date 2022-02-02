@@ -10,8 +10,10 @@ use App\Entity\Saila;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class KontratuaType extends AbstractType
 {
@@ -60,6 +62,12 @@ class KontratuaType extends AbstractType
                 'attr' => ['class' => 'form-control select2'],
                 'class' => Saila::class,
                 'placeholder' => 'Aukeratu bat'
+            ])
+            ->add ('fitxategiak', CollectionType::class, [
+                'entry_type' => FitxategiaType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true
             ])
 
         ;

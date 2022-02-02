@@ -66,6 +66,11 @@ class KontratuaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $fitxategiak = $kontratua->getFitxategiak();
+            foreach ($fitxategiak as $key => $fitxategia) {
+                $fitxategia->setKontratua($kontratua);
+                $fitxategiak->set($key, $fitxategia);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($kontratua);
             $lote = new KontratuaLote();
@@ -96,7 +101,15 @@ class KontratuaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $fitxategiak = $kontratua->getFitxategiak();
+            foreach ($fitxategiak as $key => $fitxategia) {
+                $fitxategia->setKontratua($kontratua);
+                $fitxategiak->set($key, $fitxategia);
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($kontratua);
+            $entityManager->flush();
 
             return $this->redirectToRoute('kontratua_index', [], Response::HTTP_SEE_OTHER);
         }

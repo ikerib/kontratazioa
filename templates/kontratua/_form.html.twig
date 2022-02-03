@@ -42,12 +42,29 @@
         <div class="card-header">
             <h3 class="card-title">Fitxagiak</h3>
             <div class="card-tools">
+                <button type="button" class="btn btn-default btnModalNewFitxategia" data-kontratuid="{{ kontratua.id }}" ><i class="fas fa-plus-circle"></i>&nbsp;Igo fitxategia</button>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
                 </button>
             </div>
         </div>
         <div class="card-body">
-            {{ form_row(form.fitxategiak) }}
+            <table class="table">
+                <thead>
+                <th>Deskribapena</th>
+                <th>Mota</th>
+                <th></th>
+                </thead>
+                <tbody>
+                {% for f in kontratua.fitxategiak %}
+                    <tr>
+                        <td>{{ f.name }}</td>
+                        <td>{{ f.fitxategimota }}</td>
+                        <td><a href="{{ vich_uploader_asset(f) }}" alt="{{ f.name }}">{{ f.filename }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>

@@ -63,12 +63,12 @@ class KontratuaType extends AbstractType
                 'class' => Saila::class,
                 'placeholder' => 'Aukeratu bat'
             ])
-            ->add ('fitxategiak', CollectionType::class, [
-                'entry_type' => FitxategiaType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true
-            ])
+//            ->add ('fitxategiak', CollectionType::class, [
+//                'entry_type' => FitxategiaType::class,
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//                'prototype' => true
+//            ])
 
         ;
     }

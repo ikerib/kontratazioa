@@ -27,19 +27,27 @@ class FitxategiaController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="fitxategia_new", methods={"GET", "POST"})
+     * @Route("/new/{kontratuid}", name="fitxategia_new", methods={"GET", "POST"}, options={"expose"=true},)
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, $kontratuid): Response
     {
         $fitxategium = new Fitxategia();
-        $form = $this->createForm(FitxategiaType::class, $fitxategium);
+        $form = $this->createForm(FitxategiaType::class, $fitxategium, [
+            'action' => $this->generateUrl('fitxategia_new', ['kontratuid' => $kontratuid])
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $kontratua = $entityManager->getRepository('App:Kontratua')->find($kontratuid);
+            $fitxategium->setKontratua($kontratua);
             $entityManager->persist($fitxategium);
             $entityManager->flush();
 
-            return $this->redirectToRoute('fitxategia_index', [], Response::HTTP_SEE_OTHER);
+//            return $this->redirectToRoute('fitxategia_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('kontratua_edit', [ 'id' => $kontratuid], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->renderForm('fitxategia/new.html.twig', [

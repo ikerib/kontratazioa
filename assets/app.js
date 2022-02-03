@@ -196,6 +196,23 @@ $(function () {
         }
     });
 
+
+    $('.btnModalNewFitxategia').on('click', function () {
+        const $kontratuid = $(this).data('kontratuid');
+        const url = Routing.generate('fitxategia_new', { kontratuid: $kontratuid });
+
+        $.get(url, function (data) {
+            $(".divFitxategiaUpload").html(data);
+            $('.select2').select2({ width: '100%' });
+            $('#modalFitxategia').modal();
+        });
+    });
+
+    $('.btnModalSaveFitxategiaUpload').on('click', function () {
+        console.log("kk2")
+        $('#form_fitxategia_new').submit();
+    });
+
     $('.btnDeleteButton').on('click', function (e) {
         e.preventDefault();
         Swal.fire({

@@ -56,5 +56,5 @@ services:
 
     pasaia.vich.directory.namer:
         class: App\Utils\VichDirectoryNamer
-        arguments: ['%kernel.project_dir%']
+        arguments: ['%kernel.project_dir%', 'kontratuid']
         public: true

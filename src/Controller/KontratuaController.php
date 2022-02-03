@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Fitxategia;
 use App\Entity\Kontratua;
 use App\Entity\KontratuaLote;
 use App\Form\BilatzaileaType;
+use App\Form\FitxategiaType;
 use App\Form\KontratuaLoteType;
 use App\Form\KontratuaType;
 use App\Repository\KontratuaLoteRepository;
@@ -121,10 +123,18 @@ class KontratuaController extends AbstractController
             'method' => 'POST',
         ]);
 
+        $fitxategia = new Fitxategia();
+        $fitxategia->setKontratua($kontratua);
+        $formFitxategia = $this->createForm(FitxategiaType::class, $fitxategia, [
+            'action' => $this->generateUrl('fitxategia_new', ['kontratuid' => $kontratua->getId()]),
+            'method' => 'POST',
+        ]);
+
         return $this->renderForm('kontratua/edit.html.twig', [
             'kontratua' => $kontratua,
             'form' => $form,
-            'formNewLote' => $formNewLote
+            'formNewLote' => $formNewLote,
+            'formFitxategia' => $formFitxategia
         ]);
     }
 

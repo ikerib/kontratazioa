@@ -61,7 +61,7 @@ $(function () {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    console.log(urlParams.get('do'));
+    // console.log(urlParams.get('do'));
 
     if (urlParams.get('do')==='addLote') {
         const loteid = urlParams.get('loteid');

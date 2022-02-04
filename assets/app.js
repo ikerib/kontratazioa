@@ -198,18 +198,129 @@ $(function () {
 
 
     $('.btnModalNewFitxategia').on('click', function () {
-        const $kontratuid = $(this).data('kontratuid');
-        const url = Routing.generate('fitxategia_new', { kontratuid: $kontratuid });
 
-        $.get(url, function (data) {
-            $(".divFitxategiaUpload").html(data);
-            $('.select2').select2({ width: '100%' });
-            $('#modalFitxategia').modal();
+        Swal.fire({
+            title: 'Gorde aldaketak fitxategia igo aurretik.?',
+            showDenyButton: true,
+            confirmButtonText: 'Gorde dut. Jarraitu.',
+            denyButtonText: `Ez dut gorde`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                const $kontratuid = $(this).data('kontratuid');
+                const url = Routing.generate('fitxategia_new', { kontratuid: $kontratuid });
+
+                $.get(url, function (data) {
+                    $(".divFitxategiaUpload").html(data);
+                    $('.select2').select2({ width: '100%' });
+                    $('#modalFitxategia').modal();
+                });
+            } else if (result.isDenied) {
+                Swal.close();
+            }
+        })
+
+    });
+
+    $('.btnEditFileModal').on('click', function () {
+
+        Swal.fire({
+            title: 'Gorde aldaketak fitxategia igo aurretik.?',
+            showDenyButton: true,
+            confirmButtonText: 'Gorde dut. Jarraitu.',
+            denyButtonText: `Ez dut gorde`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                const fitxategiId = $(this).data('fitxategiid');
+                const kontratuaId = $(this).data('kontratuaid');
+                const url = Routing.generate('fitxategia_edit', {id: fitxategiId, kontratuid: kontratuaId});
+                $.get(url, function (data) {
+                    $(".divFitxategiaUpload").html(data);
+                    $('.select2').select2({width: '100%'});
+                    $('#modalFitxategia').modal();
+                });
+            } else if (result.isDenied) {
+                Swal.close();
+            }
+        });
+
+    });
+
+    $('.btnDeleteFileModal').on('click', function () {
+
+        Swal.fire({
+            title: 'Gorde aldaketak fitxategia igo aurretik.?',
+            showDenyButton: true,
+            confirmButtonText: 'Gorde dut. Jarraitu.',
+            denyButtonText: `Ez dut gorde`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                const fitxategiId = $(this).data('fitxategiid');
+                const kontratuaId = $(this).data('kontratuaid');
+                const url = Routing.generate('fitxategia_delete', {id: fitxategiId, kontratuid: kontratuaId});
+                console.log(url)
+                $.get(url, function (data) {
+                    $(".divFitxategiaUpload").html(data);
+                    $('.select2').select2({width: '100%'});
+                    $('#modalFitxategia').modal();
+                });
+            } else if (result.isDenied) {
+                Swal.close();
+            }
         });
     });
 
+    $('.btnDeleteFileButton').on('click', function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: 'Gorde aldaketak fitxategia igo aurretik.?',
+            showDenyButton: true,
+            confirmButtonText: 'Gorde dut. Jarraitu.',
+            denyButtonText: `Ez dut gorde`,
+        }).then((result) => {
+            Swal.fire({
+                title: 'Ziur zaude?',
+                text: "Onartuz gero ezingo da atzera egin!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Bai, ezabatu'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const fitxategiId = $(this).data('fitxategiid');
+                    const kontratuaId = $(this).data('kontratuaid');
+                    const token = $(this).data('token');
+                    const url = Routing.generate('fitxategia_delete', {id: fitxategiId, kontratuid: kontratuaId});
+
+                    axios.post(url,{"token": token})
+                    .then((response) =>  {
+                        $(this).closest('tr').remove();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Fitxategia ezabatu da.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }).catch(function(error){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'Zerbait ez da ongi joan. <br/>Jarri harremanetan informatika sailarekin.'
+                        })
+                    });
+                }
+            })
+        });
+
+
+    });
+
     $('.btnModalSaveFitxategiaUpload').on('click', function () {
-        console.log("kk2")
         $('#form_fitxategia_new').submit();
     });
 
@@ -225,7 +336,7 @@ $(function () {
             confirmButtonText: 'Bai, ezabatu'
         }).then((result) => {
             if (result.isConfirmed) {
-                $(this).closest('form').submit();
+                const url = Routing.generate('fitxategia_delete', {id: fitxategiId, kontratuid: kontratuaId});
             }
         })
     });

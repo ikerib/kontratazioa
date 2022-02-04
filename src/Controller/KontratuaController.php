@@ -139,7 +139,7 @@ class KontratuaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="kontratua_delete", methods={"POST"})
+     * @Route("/{id}", name="kontratua_delete", methods={"POST", "DELETE"})
      */
     public function delete(Request $request, Kontratua $kontratua): Response
     {

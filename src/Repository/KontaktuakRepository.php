@@ -2,34 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Kontratua;
+use App\Entity\Kontaktuak;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Kontratua|null find($id, $lockMode = null, $lockVersion = null)
- * @method Kontratua|null findOneBy(array $criteria, array $orderBy = null)
- * @method Kontratua[]    findAll()
- * @method Kontratua[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Kontaktuak|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Kontaktuak|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Kontaktuak[]    findAll()
+ * @method Kontaktuak[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class KontratuaRepository extends ServiceEntityRepository
+class KontaktuakRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Kontratua::class);
-    }
-
-    public function getAllSortedByName()
-    {
-        $qm = $this->createQueryBuilder('k')
-            ->orderBy('k.izena_eus')
-        ;
-
-        return $qm->getQuery()->getResult();
+        parent::__construct($registry, Kontaktuak::class);
     }
 
     // /**
-    //  * @return Kontratua[] Returns an array of Kontratua objects
+    //  * @return Kontaktuak[] Returns an array of Kontaktuak objects
     //  */
     /*
     public function findByExampleField($value)
@@ -46,7 +37,7 @@ class KontratuaRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Kontratua
+    public function findOneBySomeField($value): ?Kontaktuak
     {
         return $this->createQueryBuilder('k')
             ->andWhere('k.exampleField = :val')
@@ -56,7 +47,4 @@ class KontratuaRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function getAllSortedBySaila()
-    {
-    }
 }

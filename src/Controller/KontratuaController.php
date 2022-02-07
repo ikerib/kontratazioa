@@ -11,6 +11,7 @@ use App\Form\KontratuaLoteType;
 use App\Form\KontratuaType;
 use App\Repository\KontratuaLoteRepository;
 use App\Repository\KontratuaRepository;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,39 @@ class KontratuaController extends AbstractController
         return $this->render('kontratua/index.html.twig', [
             'loteak' => $query,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/abisuak", name="kontratua_abisuak", methods={"GET"})
+     */
+    public function abisuak(Request $request, KontratuaLoteRepository $kontratuaLoteRepository): Response
+    {
+        $myFilters = $this->getFinderParams($request->query->get('bilatzailea'));
+        $kontratuak = $kontratuaLoteRepository->getAllSortedBySaila($myFilters);
+
+        $kontratuaLote = new KontratuaLote();
+        $form = $this->createForm(BilatzaileaType::class, $kontratuaLote, [
+            'method' => 'GET',
+            'action' => $this->generateUrl('kontratua_abisuak')
+        ]);
+
+        return $this->render('kontratua/abisuak.html.twig', [
+            'kontratuak' => $kontratuak,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/mail", name="kontratua_mail", methods={"POST"})
+     */
+    public function mail(Request $request, KontratuaLoteRepository $kontratuaLoteRepository): Response
+    {
+        $selected = $request->get('aukera');
+        $aukerak =[];
+
+        return $this->render('kontratua/mail.html.twig', [
+            'kontratuak' => $selected
         ]);
     }
 

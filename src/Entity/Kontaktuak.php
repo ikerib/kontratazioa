@@ -10,10 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *     collectionOperations={},
- *     itemOperations={"get"},
+ *     collectionOperations={"get"},
+ *     itemOperations={},
  *     normalizationContext={"groups"={"kontaktua:read"}},
- *     shortName="Kontratua"
  * )
  * @ORM\Entity(repositoryClass=KontaktuakRepository::class)
  */
@@ -44,7 +43,6 @@ class Kontaktuak
 
     /**
      * @ORM\ManyToOne(targetEntity=Saila::class, inversedBy="kontaktuak")
-     * @Groups({"kontaktua:read"})
      */
     private $saila;
 

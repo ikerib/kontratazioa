@@ -18,18 +18,26 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="form-group">
-                        <input class="form-control" placeholder="Nori:">
+                        <label for="txtAutocompleteKontaktuaks">Nori</label>
+{#                        <input id="txtAutocompleteKontaktuaks" class="form-control" placeholder="Nori:">#}
+                        <select id="txtAutocompleteKontaktuaks" class="form-control" name="mailto[]" multiple="multiple">
+                            {% for k in kontaktuak %}
+                                <option value="{{ k.id }}">{{ k.name }} - {{ k.email }}</option>
+                            {% endfor %}
+                        </select>
+
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="Gaia:">
+                        <label for="txtGaia">Gaia</label>
+                        <input id="txtGaia" class="form-control" placeholder="Gaia:">
                     </div>
+
                     <div class="form-group">
-                        <div class="btn btn-default btn-file">
-                            <i class="fas fa-paperclip"></i> Attachment
-                            <input type="file" name="attachment">
-                        </div>
-                        <p class="help-block">Max. 32MB</p>
+                        <textarea name="mail_body" id="txtBody" cols="30" rows="10">
+
+                        </textarea>
                     </div>
+
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -44,4 +52,12 @@
             <!-- /.card -->
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('search') }}
+
 {% endblock %}

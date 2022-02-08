@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={},
+ *     itemOperations={"get"},
  *     normalizationContext={"groups"={"kontaktua:read"}},
  * )
  * @ORM\Entity(repositoryClass=KontaktuakRepository::class)

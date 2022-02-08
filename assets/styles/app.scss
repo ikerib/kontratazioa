@@ -4,8 +4,8 @@
 @import "~admin-lte/plugins/datatables-rowgroup/css/rowGroup.bootstrap4.min.css";
 @import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css";
 @import "~eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css";
-@import "~select2/dist/css/select2.min.css";
 @import "~admin-lte/dist/css/adminlte.min.css";
+@import "~select2/dist/css/select2.min.css";
 
 ul {
   margin-bottom: 0;
@@ -17,3 +17,16 @@ table.dataTable tr.dtrg-group td {
   --bs-bg-opacity: 0.25;
   opacity: 0.5;
 }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #007bff !important;
+  border: 0px solid #000000 !important;
+  color: #fff !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  background-color: #007bff !important;
+  border: 0px solid #000000 !important;
+  color: #fff !important;
+}
+

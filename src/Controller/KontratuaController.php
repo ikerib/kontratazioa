@@ -9,6 +9,7 @@ use App\Form\BilatzaileaType;
 use App\Form\FitxategiaType;
 use App\Form\KontratuaLoteType;
 use App\Form\KontratuaType;
+use App\Repository\KontaktuakRepository;
 use App\Repository\KontratuaLoteRepository;
 use App\Repository\KontratuaRepository;
 use phpDocumentor\Reflection\Types\This;
@@ -63,13 +64,16 @@ class KontratuaController extends AbstractController
     /**
      * @Route("/mail", name="kontratua_mail", methods={"POST"})
      */
-    public function mail(Request $request, KontratuaLoteRepository $kontratuaLoteRepository): Response
+    public function mail(Request $request, KontratuaLoteRepository $kontratuaLoteRepository, KontaktuakRepository $kontaktuakRepository): Response
     {
         $selected = $request->get('aukera');
         $aukerak =[];
 
+        $kontaktuak = $kontaktuakRepository->findAll();
+
         return $this->render('kontratua/mail.html.twig', [
-            'kontratuak' => $selected
+            'kontratuak' => $selected,
+            'kontaktuak' => $kontaktuak
         ]);
     }
 

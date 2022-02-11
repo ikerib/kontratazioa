@@ -11,45 +11,37 @@
 
     <div class="row">
         <div class="col-12">
+            {{ form_start(form) }}
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">Idatzi mezua:</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="txtAutocompleteKontaktuaks">Nori</label>
-{#                        <input id="txtAutocompleteKontaktuaks" class="form-control" placeholder="Nori:">#}
-                        <select id="txtAutocompleteKontaktuaks" class="form-control" name="mailto[]" multiple="multiple">
-                            {% for k in kontaktuak %}
-                                <option value="{{ k.id }}">{{ k.name }} - {{ k.email }}</option>
-                            {% endfor %}
-                        </select>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="txtGaia">Gaia</label>
-                        <input id="txtGaia" class="form-control" placeholder="Gaia:">
-                    </div>
+                    {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-                    <div class="form-group">
-                        <textarea name="mail_body" id="txtBody" cols="30" rows="10">
-
-                        </textarea>
-                    </div>
+                    {{ form_row(form.nori) }}
+                    {{ form_row(form.gaia) }}
+                    {{ form_row(form.editor) }}
 
                 </div>
+
+
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <div class="float-right">
-                        <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
-                        <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+{#                        <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>#}
+{#                        <button type="submit" class="btn btn-primary">#}
+                            {{ form_widget(form.send, { 'label': 'Bidali' }) }}
+{#                        </button>#}
                     </div>
-                    <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
+{#                    <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>#}
                 </div>
                 <!-- /.card-footer -->
             </div>
             <!-- /.card -->
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

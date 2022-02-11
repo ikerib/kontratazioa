@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,7 +28,7 @@ class KontratuaLoteType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'datepicker col-2 col-sm-2',
+                    'class' => 'datepicker col-8 col-sm-8',
                     'autocomplete' => 'off'
                 ]
             ])
@@ -37,10 +38,11 @@ class KontratuaLoteType extends AbstractType
                 ]
             ])
             ->add('fetxaIraupena', null,[
+                'label' => 'Data iraupena',
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'class' => 'datepicker col-8 col-sm-8 datetimepicker-input',
                     'autocomplete' => 'off'
                 ]
             ])
@@ -48,7 +50,7 @@ class KontratuaLoteType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'class' => 'datepicker col-8 col-sm-8 datetimepicker-input',
                     'autocomplete' => 'off'
                 ]
             ])
@@ -56,7 +58,7 @@ class KontratuaLoteType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'class' => 'datepicker col-8 col-sm-8 datetimepicker-input',
                     'autocomplete' => 'off'
                 ]
             ])
@@ -65,7 +67,7 @@ class KontratuaLoteType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'datepicker col-2 col-sm-2 datetimepicker-input',
+                    'class' => 'datepicker col-8 col-sm-8 datetimepicker-input',
                     'autocomplete' => 'off'
                 ]
             ])
@@ -81,6 +83,12 @@ class KontratuaLoteType extends AbstractType
                 'attr'  => [
                     'autocomplete' => 'off'
                 ]
+            ])
+            ->add('zenbatekoarenUnitatea',TextType::class, [
+                'label' => 'Unitatea',
+                'attr' => array(
+                    'placeholder' => '€, €/Mes, €/Año'
+                )
             ])
             ->add('adjudikazioaIva',MoneyType::class,[
                 'label' => 'BEZ',

@@ -38,12 +38,17 @@ class KontratuaLote
     private $name;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=255)
+     */
+    private $zenbatekoarenUnitatea;
+
+    /**
+     * @ORM\Column(type="float", scale="5", nullable=true)
      */
     private $aurrekontuaIva;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float", scale="5", nullable=true)
      */
     private $aurrekontuaIvaGabe;
 
@@ -63,12 +68,12 @@ class KontratuaLote
     private $fetxaIraupena;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float", scale="5", nullable=true)
      */
     private $adjudikazioaIva;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float", scale="5", nullable=true)
      */
     private $adjudikazioaIvaGabe;
 
@@ -414,6 +419,18 @@ class KontratuaLote
                 $fitxategiak->setLotea(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getZenbatekoarenUnitatea(): ?string
+    {
+        return $this->zenbatekoarenUnitatea;
+    }
+
+    public function setZenbatekoarenUnitatea(string $zenbatekoarenUnitatea): self
+    {
+        $this->zenbatekoarenUnitatea = $zenbatekoarenUnitatea;
 
         return $this;
     }

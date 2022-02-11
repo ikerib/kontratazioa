@@ -31,9 +31,8 @@
                     <div class="card-header">
                         <h3 class="card-title">Kontratuak</h3>
                         <div class="card-tools">
-                            <a class="btn btn-outline-primary" href="{{ path('kontratua_abisuak') }}">Abisuak</a>
-                            <a class="btn btn-outline-primary" href="{{ path('home') }}">Iraungitxe fetxa gertuen dunetak</a>
-                            <a class="btn btn-outline-primary" href="{{ path('kontratua_new') }}">Kontratu berria</a>
+                            <a class="btn btn-outline-primary" href="{{ path('kontratua_index') }}">Itzuli</a>
+                            <input type="submit" class="btn btn-primary" value="Aukeratu eta jarraitu">
                         </div>
                     </div>
                     <div class="card-body">
@@ -43,6 +42,7 @@
                                 <th></th>
                                 <th>Saila</th>
                                 <th>Kontratua</th>
+                                <th>Lote</th>
                                 <th>Kontratista</th>
                                 <th></th>
                                 </thead>
@@ -52,6 +52,7 @@
                                         <td><input type="checkbox" name="aukera[]" value="{{ k.id }}"></td>
                                         <td>{{ k.kontratua.saila }}</td>
                                         <td>{{ k.kontratua }}</td>
+                                        <td>{{ k.name }}</td>
                                         <td>{{ k.kontratista }}</td>
                                     </tr>
                                 {% endfor %}
@@ -60,7 +61,7 @@
 
                     </div>
                     <div class="card-footer">
-                        <input type="submit" class="btn btn-primary" value="Aukeratu">Aukeratu
+                        <input type="submit" class="btn btn-primary" value="Aukeratu eta jarraitu">
                     </div>
                 </div>
             </div>

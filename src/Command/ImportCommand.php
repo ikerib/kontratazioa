@@ -37,21 +37,22 @@ class ImportCommand extends Command
 
     protected function configure(): void
     {
-//        $this
-          //  ->addArgument('fitxategia', InputArgument::REQUIRED, 'fitxategia')
+        $this
+            ->addArgument('fitxategia', InputArgument::REQUIRED, 'fitxategia')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-//        ;
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+        $filename = $input->getArgument('fitxategia');
 
         $kontratuMotaRepo = $this->entityManager->getRepository(Mota::class);
         $prozeduraRepo = $this->entityManager->getRepository(Prozedura::class);
         $sailaRepo = $this->entityManager->getRepository(Saila::class);
 
-        $kontratuak = $this->getCsvAsArray();
+        $kontratuak = $this->getCsvAsArray($filename);
 
         $progressBar = new ProgressBar($output, count($kontratuak));
         $progressBar->start();
@@ -113,8 +114,8 @@ class ImportCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function getCsvAsArray() {
-        $inputFile = $this->projectDir . '/doc/inport.csv';
+    private function getCsvAsArray($filename) {
+        $inputFile = $this->projectDir . '/' . $filename ;
         $decorder = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
         return $decorder->decode(file_get_contents($inputFile), 'csv', [CsvEncoder::DELIMITER_KEY => '|']);
     }
@@ -126,6 +127,7 @@ class ImportCommand extends Command
         $lote->setName($kontratua['LOTE']);
         $lote->setAurrekontuaIva((float)$kontratua["OINARRIZKO AURREKONTUA / IMPORTE LICITACION (CON IVA)"]);
         $lote->setAurrekontuaIvaGabe((float)$kontratua["OINARRIZKO AURREKONTUA / IMPORTE LICITACION (SIN IVA)"]);
+        $lote->setZenbatekoarenUnitatea($kontratua['ZENBATEKOAREN UNITATEA']);
 
         // Kontratista DB-an ez badago, sortu
         if (!$kontratista = $kontratistaRepo->findOneBy(['izena_eus' => $kontratua['KONTRATISTA / CONTRATISTA']])) {

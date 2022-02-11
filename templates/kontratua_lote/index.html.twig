@@ -4,7 +4,6 @@
             <table class="table table-bordered table-hover text-nowrap">
                 <thead>
                 <tr>
-                    {#<th>Id</th>#}
                     <th>Lote</th>
                     <th>Aurrekontua</th>
                     <th>Adjudikazioa</th>
@@ -46,10 +45,6 @@
                                 </li>
                             </ul>
                         </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="10">{{ "no records found" | trans}}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -69,11 +69,11 @@ $(function () {
 
     $('.trSelect').on('click', function () {
         if ( $(this).hasClass('selected') ) {
-            $(this).removeClass('selected').removeClass('bg-secondary');
+            $(this).removeClass('selected').removeClass('trSelected');
             $('#txtRow').val("")[0].dispatchEvent(new Event('input'));
         }else {
-            $('tr.selected').removeClass('selected').removeClass('bg-secondary');
-            $(this).addClass('selected').addClass('bg-secondary');
+            $('tr.selected').removeClass('selected').removeClass('trSelected');
+            $(this).addClass('selected').addClass('trSelected');
             $('#txtRow').val($(this).data('loteid'))[0].dispatchEvent(new Event('input'));
         }
     });

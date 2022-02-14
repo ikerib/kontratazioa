@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Arduraduna;
+use App\Entity\Egoera;
 use App\Entity\Kontratista;
 use App\Entity\Kontratua;
 use App\Entity\Mota;
@@ -66,6 +67,11 @@ class KontratuaType extends AbstractType
             ->add('saila', EntityType::class, [
                 'attr' => ['class' => 'form-control select2'],
                 'class' => Saila::class,
+                'placeholder' => 'Aukeratu bat'
+            ])
+            ->add('egoera', EntityType::class, [
+                'attr' => ['class' => 'form-control select2'],
+                'class' => Egoera::class,
                 'placeholder' => 'Aukeratu bat'
             ])
 //            ->add ('fitxategiak', CollectionType::class, [

@@ -92,7 +92,7 @@ class KontratuaLoteType extends AbstractType
                 )
             ])
             ->add('adjudikazioaIva',MoneyType::class,[
-                'label' => 'BEZ',
+                'label' => 'Guztira',
                 'attr'  => [
                     'autocomplete' => 'off'
                 ]
@@ -104,7 +104,7 @@ class KontratuaLoteType extends AbstractType
                     'autocomplete' => 'off'
                 ]
             ])
-            ->add('amaitua')
+//            ->add('amaitua')
             ->add('luzapena', null,[
                 'attr'  => [
                     'autocomplete' => 'off'
@@ -116,9 +116,9 @@ class KontratuaLoteType extends AbstractType
                 'placeholder' => 'Aukeratu bat'
             ])
             ->add('tipoIva', EntityType::class, [
+                'label' => 'B.E.Z',
                 'class' => TipoIva::class,
-                'attr' => ['class' => 'form-control select2'],
-                'placeholder' => 'Aukeratu bat'
+                'attr' => ['class' => 'form-control select2']
             ])
             ->add('kontratua',null,[
                 'attr'  => [

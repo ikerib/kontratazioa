@@ -149,6 +149,7 @@ $(function () {
     });
 
     $('#btnSaveButton').on('click', function () {
+        console.log('btnGorde click')
         $('#crudSubmitButton').trigger('click');
     });
 

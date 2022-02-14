@@ -12,6 +12,7 @@
                 {{ form_row(form.izena_eus) }}
                 {{ form_row(form.izena_es ) }}
                 {{ form_row(form.artxiboa ) }}
+                {{ form_row(form.arduraduna ) }}
             </div>
         </div>
     </div>
@@ -49,6 +50,9 @@
             {{ form_widget(form.oharrak) }}
         </div>
     </div>
+</div>
+<div style="display: none;">
+    <button id="crudSubmitButton" class="btn">{{ button_label|default(' Save') }}</button>
 </div>
 {{ form_end(form) }}
 

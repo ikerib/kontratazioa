@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Arduraduna;
 use App\Entity\Kontratista;
 use App\Entity\Kontratua;
 use App\Entity\Mota;
@@ -49,6 +50,11 @@ class KontratuaType extends AbstractType
             ->add('mota', EntityType::class, [
                 'attr' => ['class' => 'form-control select2'],
                 'class' => Mota::class,
+                'placeholder' => 'Aukeratu bat'
+            ])
+            ->add('arduraduna', EntityType::class, [
+                'attr' => ['class' => 'form-control select2'],
+                'class' => Arduraduna::class,
                 'placeholder' => 'Aukeratu bat'
             ])
             ->add('oharrak', CKEditorType::class,[])

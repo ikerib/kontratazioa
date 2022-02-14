@@ -24,10 +24,7 @@
             <div class="card-header">
                 <h3 class="card-title text-lg">Kontratua</h3>
                 <div class="card-tools">
-{#                    <a id="btnSaveButton" class="btn btn-dark" href="#">&nbsp;<span title="3 New Messages" class="badge badge-primary"></span>{{ "Fitxategiak" | trans}}</a>#}
-{#                    &nbsp;#}
                     <a id="btnSaveButton" class="btn btn-dark" href="#"><i class="fas fa-save"></i>&nbsp;{{ "Save" | trans}}</a>
-{#                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>#}
                     <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
                     </button>
@@ -113,9 +110,7 @@
     <div id="app"></div>
 {% endif %}
 
-<div style="display: none;">
-    <button id="crudSubmitButton" class="btn">{{ button_label|default(' Save') }}</button>
-</div>
+
 
 
 <div class="modal fade" id="modalLoteCrud">

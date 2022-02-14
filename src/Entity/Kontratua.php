@@ -116,6 +116,11 @@ class Kontratua
      */
     private $arduraduna;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Egoera::class, inversedBy="kontratua")
+     */
+    private $egoera;
+
     public function __construct()
     {
         $this->lotes = new ArrayCollection();
@@ -331,6 +336,18 @@ class Kontratua
     public function setArduraduna(?Arduraduna $arduraduna): self
     {
         $this->arduraduna = $arduraduna;
+
+        return $this;
+    }
+
+    public function getEgoera(): ?Egoera
+    {
+        return $this->egoera;
+    }
+
+    public function setEgoera(?Egoera $egoera): self
+    {
+        $this->egoera = $egoera;
 
         return $this;
     }

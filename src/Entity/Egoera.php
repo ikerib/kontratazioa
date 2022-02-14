@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ArduradunaRepository;
+use App\Repository\EgoeraRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,9 +11,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass=ArduradunaRepository::class)
+ * @ORM\Entity(repositoryClass=EgoeraRepository::class)
  */
-class Arduraduna
+class Egoera
 {
     Use TimestampableEntity;
     /**
@@ -32,6 +32,11 @@ class Arduraduna
     /******************************************************************************************************************/
     /******************************************************************************************************************/
 
+    /**
+     * @ORM\OneToMany(targetEntity=Kontratua::class, mappedBy="egoera")
+     */
+    private $kontratua;
+
     public function __construct()
     {
         $this->kontratua = new ArrayCollection();
@@ -41,11 +46,6 @@ class Arduraduna
     {
         return $this->name;
     }
-
-    /**
-     * @ORM\OneToMany(targetEntity=Kontratua::class, mappedBy="arduraduna")
-     */
-    private $kontratua;
 
     /******************************************************************************************************************/
     /******************************************************************************************************************/
@@ -81,7 +81,7 @@ class Arduraduna
     {
         if (!$this->kontratua->contains($kontratua)) {
             $this->kontratua[] = $kontratua;
-            $kontratua->setArduraduna($this);
+            $kontratua->setEgoera($this);
         }
 
         return $this;
@@ -91,8 +91,8 @@ class Arduraduna
     {
         if ($this->kontratua->removeElement($kontratua)) {
             // set the owning side to null (unless already changed)
-            if ($kontratua->getArduraduna() === $this) {
-                $kontratua->setArduraduna(null);
+            if ($kontratua->getEgoera() === $this) {
+                $kontratua->setEgoera(null);
             }
         }
 

@@ -329,7 +329,8 @@ $(function () {
             confirmButtonText: 'Bai, ezabatu'
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = Routing.generate('fitxategia_delete', {id: fitxategiId, kontratuid: kontratuaId});
+                // const url = Routing.generate('fitxategia_delete', {id: fitxategiId, kontratuid: kontratuaId});
+                $(this).closest('form').submit();
             }
         })
     });

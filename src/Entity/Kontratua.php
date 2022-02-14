@@ -111,6 +111,11 @@ class Kontratua
      */
     private $fitxategiak;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Arduraduna::class, inversedBy="kontratua")
+     */
+    private $arduraduna;
+
     public function __construct()
     {
         $this->lotes = new ArrayCollection();
@@ -314,6 +319,18 @@ class Kontratua
                 $fitxategiak->setKontratua(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getArduraduna(): ?Arduraduna
+    {
+        return $this->arduraduna;
+    }
+
+    public function setArduraduna(?Arduraduna $arduraduna): self
+    {
+        $this->arduraduna = $arduraduna;
 
         return $this;
     }

@@ -14,15 +14,11 @@
                                 {{ form_widget(form.name)}}
                             </div>
                         </div>
-
-
-
                     </div>
                     <div class="col-6">
                         {{ form_row(form.amaitua) }}
                     </div>
                 </div>
-
 
                 {{ form_row(form.kontratista) }}
                 <div class="row">
@@ -51,8 +47,6 @@
                     {{ form_row(form.iraupena) }}
                 </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -76,8 +70,16 @@
                 <h5 class="card-title m-0">Adjudikazioa</h5>
             </div>
             <div class="card-body">
-                {{ form_row(form.adjudikazioaIva) }}
-                {{ form_row(form.adjudikazioaIvaGabe) }}
+                <div class="mb-2 row">
+                    <div class="col-5">
+                        {{ form_label(form.adjudikazioaIvaGabe, null, {'label_attr': {'class':'col-width-100'}})}}
+                        <div class="input-group">
+                            {{ form_widget(form.adjudikazioaIvaGabe)}}
+                        </div>
+                    </div>
+                </div>
+{#                {{ form_row(form.adjudikazioaIva) }}#}
+{#                {{ form_row(form.adjudikazioaIvaGabe) }}#}
             </div>
         </div>
     </div>

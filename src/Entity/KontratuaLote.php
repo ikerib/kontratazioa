@@ -137,6 +137,11 @@ class KontratuaLote
      */
     private $fitxategiak;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TipoIva::class, inversedBy="lote")
+     */
+    private $tipoIva;
+
     public function __construct()
     {
         $this->alarmak = new ArrayCollection();
@@ -431,6 +436,18 @@ class KontratuaLote
     public function setZenbatekoarenUnitatea(string $zenbatekoarenUnitatea): self
     {
         $this->zenbatekoarenUnitatea = $zenbatekoarenUnitatea;
+
+        return $this;
+    }
+
+    public function getTipoIva(): ?TipoIva
+    {
+        return $this->tipoIva;
+    }
+
+    public function setTipoIva(?TipoIva $tipoIva): self
+    {
+        $this->tipoIva = $tipoIva;
 
         return $this;
     }

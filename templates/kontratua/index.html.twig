@@ -42,7 +42,6 @@
                             <th>{{ "Espedientea" | trans}}</th>
                             <th>{{ "Lote" | trans}}</th>
                             <th>{{ "Mota" | trans }}</th>
-                            <th>{{ "Izena_eus" | trans}}</th>
                             <th>{{ "Sinadura" | trans}}</th>
                             <th>{{ "Iraupena" | trans}}</th>
                             <th>{{ "Amaitua" | trans}}</th>
@@ -56,7 +55,6 @@
                             <td><a href="{{ path('kontratua_edit', { 'id': lote.kontratua.id }) }}">{{ lote.kontratua.espedientea }} - {{ lote.kontratua.izenaEus }}</a></td>
                             <td>{{ lote.name }}</td>
                             <td>{{ lote.kontratua.mota }}</td>
-                            <td>{{ lote.kontratua.izenaEus }}</td>
                             <td class="text-center">{{ lote.sinadura ? lote.sinadura|date('Y-m-d') : '' }}</td>
                             <td>{{ lote.iraupena }}</td>
                             <td>{% if lote.amaitua %}<span class="badge badge-success">Bai</span>{% else %}<span class="badge badge-danger">Ez</span>{% endif %}</td>

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Kontratista;
 use App\Entity\KontratuaLote;
+use App\Entity\TipoIva;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -97,8 +98,9 @@ class KontratuaLoteType extends AbstractType
                 ]
             ])
             ->add('adjudikazioaIvaGabe',MoneyType::class,[
-                'label' => 'BEZ gabe',
-                'attr'  => [
+                'label' => 'Zenbatekoa',
+                'attr' => [
+                    'class' => 'col-8 col-sm-8',
                     'autocomplete' => 'off'
                 ]
             ])
@@ -110,6 +112,11 @@ class KontratuaLoteType extends AbstractType
             ])
             ->add('kontratista', EntityType::class, [
                 'class' => Kontratista::class,
+                'attr' => ['class' => 'form-control select2'],
+                'placeholder' => 'Aukeratu bat'
+            ])
+            ->add('tipoIva', EntityType::class, [
+                'class' => TipoIva::class,
                 'attr' => ['class' => 'form-control select2'],
                 'placeholder' => 'Aukeratu bat'
             ])

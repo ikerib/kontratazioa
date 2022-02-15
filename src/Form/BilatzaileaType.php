@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Egoera;
 use App\Entity\KontratuaLote;
+use App\Entity\Saila;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +22,18 @@ class BilatzaileaType extends AbstractType
                 'attr' => ['class' => 'form-control select2'],
                 'placeholder' => 'Aukeratu bat'
             ])
-            ->add('amaitua')
+            ->add('saila', EntityType::class, [
+                'class' => Saila::class,
+                'attr' => ['class' => 'form-control select2'],
+                'placeholder' => 'Aukeratu bat',
+                'mapped' => false
+            ])
+            ->add('egoera', EntityType::class, [
+                'class' => Egoera::class,
+                'attr' => ['class' => 'form-control select2'],
+                'placeholder' => 'Aukeratu bat',
+                'mapped' => false
+            ])
         ;
     }
 

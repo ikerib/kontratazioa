@@ -518,4 +518,31 @@ $(function () {
         newElem.appendTo(list);
     });
 
+
+    $("#chkAll").change(function(){
+
+        var checked = $(this).is(':checked');
+        if(checked){
+            $(".chkSelect").each(function(){
+                $(this).prop("checked",true);
+            });
+        }else{
+            $(".chkSelect").each(function(){
+                $(this).prop("checked",false);
+            });
+        }
+    });
+
+    // Changing state of CheckAll checkbox
+    $(".chkSelect").click(function(){
+
+        if($(".chkSelect").length == $(".chkSelect:checked").length) {
+            $("#chkAll").prop("checked", true);
+        } else {
+            $("#chkAll").prop("checked", false);
+        }
+
+    });
+
 });
+

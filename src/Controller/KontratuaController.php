@@ -36,7 +36,7 @@ class KontratuaController extends AbstractController
     public function index(Request $request, KontratuaLoteRepository $kontratuaLoteRepository): Response
     {
         $myFilters = $this->getFinderParams($request->query->get('bilatzailea'));
-        $query = $kontratuaLoteRepository->bilaketa($myFilters);
+        $query = $kontratuaLoteRepository->getAllSortedBySaila($myFilters);
         $kontratuaLote = new KontratuaLote();
         $form = $this->createForm(BilatzaileaType::class, $kontratuaLote, [
             'method' => 'GET',

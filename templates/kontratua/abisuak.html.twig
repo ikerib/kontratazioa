@@ -32,36 +32,35 @@
                         <h3 class="card-title">Kontratuak</h3>
                         <div class="card-tools">
                             <a class="btn btn-outline-primary" href="{{ path('kontratua_index') }}">Itzuli</a>
-                            <input type="submit" class="btn btn-primary" value="Aukeratu eta jarraitu">
+                            <input type="submit" class="btn btn-outline-dark" value="Aukeratu eta jarraitu">
                         </div>
                     </div>
                     <div class="card-body">
-
-                            <table class="table table-striped table-condensed">
-                                <thead>
-                                <th></th>
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                                <th><input type="checkbox" id="chkAll"></th>
                                 <th>Saila</th>
                                 <th>Kontratua</th>
                                 <th>Lote</th>
                                 <th>Kontratista</th>
-                                <th></th>
-                                </thead>
-                                <tbody>
+                                <th>Egoera</th>
+                            </thead>
+                            <tbody>
                                 {% for k in kontratuak %}
                                     <tr>
-                                        <td><input type="checkbox" name="aukera[]" value="{{ k.id }}"></td>
+                                        <td><input type="checkbox" class="chkSelect" name="aukera[]" value="{{ k.id }}"></td>
                                         <td>{{ k.kontratua.saila }}</td>
                                         <td>{{ k.kontratua }}</td>
                                         <td>{{ k.name }}</td>
                                         <td>{{ k.kontratista }}</td>
+                                        <td>{{ k.kontratua.egoera }}</td>
                                     </tr>
                                 {% endfor %}
-                                </tbody>
-                            </table>
-
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="card-footer">
-                        <input type="submit" class="btn btn-primary" value="Aukeratu eta jarraitu">
+                    <div class="card-footer text-right">
+                        <input type="submit" class="btn btn-outline-dark" value="Aukeratu eta jarraitu">
                     </div>
                 </div>
             </div>

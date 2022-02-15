@@ -49,6 +49,7 @@ class Notification
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"notification:write"})
      */
     private $notify=0;
 

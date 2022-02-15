@@ -39,7 +39,8 @@ export default {
       },
       user: null,
       aaa: null,
-      noiz: null
+      noiz: null,
+      notify: 1
     };
   },
   methods: {
@@ -55,7 +56,8 @@ export default {
         let data = {
           noiz: this.date,
           user: "/api/users/" + this.user,
-          lote: "/api/lotes/" + this.$store.state.selectedRow
+          lote: "/api/lotes/" + this.$store.state.selectedRow,
+          notify: true
         };
         this.addNotification(data);
         this.$router.push('/');

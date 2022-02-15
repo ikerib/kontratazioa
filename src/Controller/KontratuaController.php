@@ -42,6 +42,7 @@ class KontratuaController extends AbstractController
             'method' => 'GET',
             'action' => $this->generateUrl('kontratua_index')
         ]);
+
         return $this->render('kontratua/index.html.twig', [
             'loteak' => $query,
             'form' => $form->createView()
